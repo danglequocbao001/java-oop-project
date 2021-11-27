@@ -2,8 +2,9 @@ package schema;
 
 public class DanhMucSach {
     private String maSach;
-    private int trangThai;
+    private String tenSach;
     private String viTri;
+    private int trangThai;
 
     public void themSachVaoDauSach(String maSach, int trangThai, String viTri) {
         this.setMaSach(maSach);
@@ -23,6 +24,14 @@ public class DanhMucSach {
         this.maSach = maSach;
     }
 
+    public String getTenSach() {
+        return tenSach;
+    }
+
+    public void setTenSach(String tenSach) {
+        this.tenSach = tenSach;
+    }
+
     public int getTrangThai() {
         return trangThai;
     }
@@ -38,4 +47,5 @@ public class DanhMucSach {
     public void setViTri(String viTri) {
         this.viTri = viTri;
     }
+
 }
