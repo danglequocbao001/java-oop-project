@@ -42,37 +42,35 @@ public class Graphic {
         JLabel hoTen = new JLabel();
         JLabel MSSV = new JLabel();
         JLabel lop = new JLabel();
-        GraphicFunctions.setLabel(hoTen, contentPane, "Họ tên: Đặng Lê Quốc Bảo - Nguyễn Hữu Phước", 70, 10, 300, 50);
-        GraphicFunctions.setLabel(MSSV, contentPane, "MSSV: N19DCCN014 - N19DCCN145", 70, 40, 300, 50);
-        GraphicFunctions.setLabel(lop, contentPane, "Lớp: D19CQCN02-N - D19CQCN03-N", 70, 70, 300, 50);
-
         JButton DocGia = new JButton();
         JButton DanhMucSach = new JButton();
         JButton MuonTraSach = new JButton();
         JButton Thoat = new JButton();
 
-        GraphicFunctions.setButton(DocGia, contentPane, "ĐỘC GIẢ", 550, 80, 200, 50);
+        GraphicFunctions.setLabel(hoTen, contentPane, "Họ tên: Đặng Lê Quốc Bảo - Nguyễn Hữu Phước", 350, 10, 300, 50);
+        GraphicFunctions.setLabel(MSSV, contentPane, "MSSV: N19DCCN014 - N19DCCN145", 350, 40, 300, 50);
+        GraphicFunctions.setLabel(lop, contentPane, "Lớp: D19CQCN02-N - D19CQCN03-N", 350, 70, 300, 50);
+
+        GraphicFunctions.setButton(DocGia, contentPane, "ĐỘC GIẢ", 350, 140, 200, 50);
+        GraphicFunctions.setButton(DanhMucSach, contentPane, "DANH MỤC SÁCH", 350, 220, 200, 50);
+        GraphicFunctions.setButton(MuonTraSach, contentPane, "MƯỢN TRẢ SÁCH", 350, 300, 200, 50);
+        GraphicFunctions.setButton(Thoat, contentPane, "THOÁT", 360, 400, 180, 40);
+
         DocGia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 docGia();
             }
         });
-
-        GraphicFunctions.setButton(DanhMucSach, contentPane, "DANH MỤC SÁCH", 550, 180, 200, 50);
         DanhMucSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 danhMucSach();
             }
         });
-
-        GraphicFunctions.setButton(MuonTraSach, contentPane, "MƯỢN TRẢ SÁCH", 550, 280, 200, 50);
         MuonTraSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("clicked");
+                muonTraSach();
             }
         });
-
-        GraphicFunctions.setButton(Thoat, contentPane, "THOÁT", 350, 400, 200, 50);
         Thoat.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainFrame.setVisible(false);
@@ -87,7 +85,7 @@ public class Graphic {
     // prepareGUI();
     // JButton DanhSachDocGia = new JButton();
     // JButton ChinhSuaDocGia = new JButton();
-    // JButton QuayLai = new JButton();
+    // JButton goBack = new JButton();
 
     // GraphicFunctions.setButton(DanhSachDocGia, contentPane, "DANH SÁCH ĐỘC GIẢ",
     // 350, 120, 200, 50);
@@ -105,9 +103,9 @@ public class Graphic {
     // }
     // });
 
-    // GraphicFunctions.setButton(QuayLai, contentPane, "QUAY LẠI", 350, 330, 200,
+    // GraphicFunctions.setButton(goBack, contentPane, "QUAY LẠI", 350, 330, 200,
     // 50);
-    // QuayLai.addActionListener(new ActionListener() {
+    // goBack.addActionListener(new ActionListener() {
     // public void actionPerformed(ActionEvent e) {
     // mainMenu();
     // }
@@ -159,9 +157,9 @@ public class Graphic {
         scrollPane.setBounds(320, 20, 600, 460);
         contentPane.add(scrollPane);
 
-        JButton QuayLai = new JButton();
-        GraphicFunctions.setButton(QuayLai, contentPane, "QUAY LẠI", 20, 430, 200, 50);
-        QuayLai.addActionListener(new ActionListener() {
+        JButton goBack = new JButton();
+        GraphicFunctions.setButton(goBack, contentPane, "QUAY LẠI", 20, 430, 200, 50);
+        goBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainMenu();
             }
@@ -209,9 +207,48 @@ public class Graphic {
         scrollPane.setBounds(320, 20, 600, 460);
         contentPane.add(scrollPane);
 
-        JButton QuayLai = new JButton();
-        GraphicFunctions.setButton(QuayLai, contentPane, "QUAY LẠI", 20, 430, 200, 50);
-        QuayLai.addActionListener(new ActionListener() {
+        JButton goBack = new JButton();
+        GraphicFunctions.setButton(goBack, contentPane, "QUAY LẠI", 20, 430, 200, 50);
+        goBack.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mainMenu();
+            }
+        });
+    }
+
+    public void muonTraSach() {
+        mainFrame.setVisible(false);
+        prepareGUI();
+
+        JLabel muonTraSach = new JLabel();
+        JLabel maDocGia = new JLabel();
+        JLabel maSach = new JLabel();
+        JTextField nhapMaDocGia = new JTextField();
+        JTextField nhapMaSach = new JTextField();
+        JButton buttonMuonSach = new JButton();
+        JButton buttonTraSach = new JButton();
+        GraphicFunctions.setLabel(muonTraSach, contentPane, "MƯỢN TRẢ SÁCH", 90, 40, 120, 20);
+        GraphicFunctions.setLabel(maDocGia, contentPane, "Mã độc giả", 20, 100, 120, 20);
+        GraphicFunctions.setLabel(maSach, contentPane, "Mã sách", 20, 150, 120, 20);
+        GraphicFunctions.setTextField(nhapMaSach, contentPane, 100, 100, 120, 20);
+        GraphicFunctions.setTextField(nhapMaDocGia, contentPane, 100, 150, 120, 20);
+        GraphicFunctions.setButton(buttonMuonSach, contentPane, "MƯỢN SÁCH", 20, 210, 120, 30);
+        GraphicFunctions.setButton(buttonTraSach, contentPane, "TRẢ SÁCH", 170, 210, 120, 30);
+
+        JTable table = new JTable();
+        String column[] = { "MÃ SÁCH", "TÊN SÁCH", "VỊ TRÍ", "NGƯỜI MƯỢN" };
+        String data[][] = {
+                { "1", "OOP with JAVA", "Kệ 1 ngăn 1", "Dang Bao" },
+                { "2", "Python program language", "Kệ 1 ngăn 2", "Dang Baoo" } };
+
+        GraphicFunctions.setTable(table, contentPane, column, data);
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(320, 20, 600, 460);
+        contentPane.add(scrollPane);
+
+        JButton goBack = new JButton();
+        GraphicFunctions.setButton(goBack, contentPane, "QUAY LẠI", 20, 430, 200, 50);
+        goBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainMenu();
             }
