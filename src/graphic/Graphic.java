@@ -47,7 +47,7 @@ public class Graphic {
         JButton MuonTraSach = new JButton();
         JButton Thoat = new JButton();
 
-        GraphicFunctions.setLabel(hoTen, contentPane, "Họ tên: Đặng Lê Quốc Bảo - Nguyễn Hữu Phước", 350, 10, 300, 50);
+        GraphicFunctions.setLabel(hoTen, contentPane, "Họ tên: Đặng Lê Quốc Bảo - Nguyễn Hữu Phước", 315, 10, 300, 50);
         GraphicFunctions.setLabel(MSSV, contentPane, "MSSV: N19DCCN014 - N19DCCN145", 350, 40, 300, 50);
         GraphicFunctions.setLabel(lop, contentPane, "Lớp: D19CQCN02-N - D19CQCN03-N", 350, 70, 300, 50);
 
