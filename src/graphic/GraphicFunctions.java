@@ -1,8 +1,8 @@
-package dohoa;
+package graphic;
 
 import javax.swing.*;
 
-public class HamDoHoa {
+public class GraphicFunctions {
     public static void setLabel(JLabel label, JPanel contentPane, String text, int x, int y, int width, int height) {
         label.setText(text);
         label.setBounds(x, y, width, height);
