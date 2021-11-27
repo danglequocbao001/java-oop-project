@@ -37,8 +37,9 @@ public class DoHoa {
         mainFrame.setVisible(true);
     }
 
-    public void Start_Demo() {
-
+    public void mainMenu() {
+        mainFrame.setVisible(false);
+        prepareGUI();
         JLabel hoTen = new JLabel("", JLabel.CENTER);
         JLabel MSSV = new JLabel("", JLabel.CENTER);
         JLabel lop = new JLabel("", JLabel.CENTER);
@@ -55,7 +56,7 @@ public class DoHoa {
         HamDoHoa.setButton(DocGia, contentPane, "ĐỘC GIẢ", 550, 50, 200, 50);
         DocGia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("clicked");
+                docGia();
             }
         });
 
@@ -80,7 +81,7 @@ public class DoHoa {
             }
         });
 
-        HamDoHoa.setButton(Thoat, contentPane, "Thoát", 120, 220, 200, 50);
+        HamDoHoa.setButton(Thoat, contentPane, "THOÁT", 120, 250, 200, 50);
         Thoat.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainFrame.setVisible(false);
@@ -90,8 +91,53 @@ public class DoHoa {
         mainFrame.setVisible(true);
     }
 
+    public void docGia() {
+        mainFrame.setVisible(false);
+        prepareGUI();
+        JButton ThemDocGia = new JButton();
+        JButton DanhSachDocGia = new JButton();
+        JButton XoaDocGia = new JButton();
+        JButton ChinhSuaDocGia = new JButton();
+        JButton QuayLai = new JButton();
+
+        HamDoHoa.setButton(ThemDocGia, contentPane, "THÊM ĐỘC GIẢ", 350, 50, 200, 50);
+        ThemDocGia.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("ThemDocGia");
+            }
+        });
+
+        HamDoHoa.setButton(DanhSachDocGia, contentPane, "DANH SÁCH ĐỘC GIẢ", 350, 120, 200, 50);
+        DanhSachDocGia.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("DanhSachDocGia");
+            }
+        });
+
+        HamDoHoa.setButton(XoaDocGia, contentPane, "XÓA ĐỘC GIẢ", 350, 190, 200, 50);
+        XoaDocGia.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("XoaDocGia");
+            }
+        });
+
+        HamDoHoa.setButton(ChinhSuaDocGia, contentPane, "CHỈNH SỬA ĐỘC GIẢ ", 350, 260, 200, 50);
+        ChinhSuaDocGia.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("ChinhSuaDocGia");
+            }
+        });
+
+        HamDoHoa.setButton(QuayLai, contentPane, "QUAY LẠI", 350, 330, 200, 50);
+        QuayLai.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mainMenu();
+            }
+        });
+    }
+
     public static void main(String[] args) {
         DoHoa ChuongTrinh = new DoHoa();
-        ChuongTrinh.Start_Demo();
+        ChuongTrinh.mainMenu();
     }
 }
