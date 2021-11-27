@@ -51,21 +51,21 @@ public class Graphic {
         JButton MuonTraSach = new JButton();
         JButton Thoat = new JButton();
 
-        GraphicFunctions.setButton(DocGia, contentPane, "ĐỘC GIẢ", 550, 50, 200, 50);
+        GraphicFunctions.setButton(DocGia, contentPane, "ĐỘC GIẢ", 550, 80, 200, 50);
         DocGia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 docGia();
             }
         });
 
-        GraphicFunctions.setButton(DanhMucSach, contentPane, "DANH MỤC SÁCH", 550, 190, 200, 50);
+        GraphicFunctions.setButton(DanhMucSach, contentPane, "DANH MỤC SÁCH", 550, 180, 200, 50);
         DanhMucSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("clicked");
+                danhMucSach();
             }
         });
 
-        GraphicFunctions.setButton(MuonTraSach, contentPane, "MƯỢN TRẢ SÁCH", 550, 260, 200, 50);
+        GraphicFunctions.setButton(MuonTraSach, contentPane, "MƯỢN TRẢ SÁCH", 550, 280, 200, 50);
         MuonTraSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("clicked");
@@ -153,6 +153,56 @@ public class Graphic {
         String data[][] = {
                 { "1", "Dang", "Bao", "Nam", "Đang hoạt động" },
                 { "2", "Dangg", "Bao0", "Nam", "Đang hoạt động" } };
+
+        GraphicFunctions.setTable(table, contentPane, column, data);
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(320, 20, 600, 460);
+        contentPane.add(scrollPane);
+
+        JButton QuayLai = new JButton();
+        GraphicFunctions.setButton(QuayLai, contentPane, "QUAY LẠI", 20, 430, 200, 50);
+        QuayLai.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mainMenu();
+            }
+        });
+    }
+
+    public void danhMucSach() {
+        mainFrame.setVisible(false);
+        prepareGUI();
+
+        JLabel themSach = new JLabel();
+        JLabel maSach = new JLabel();
+        JLabel tenSach = new JLabel();
+        JLabel viTri = new JLabel();
+        JTextField nhapMaSach = new JTextField();
+        JTextField nhapTenSach = new JTextField();
+        JTextField nhapViTri = new JTextField();
+        JButton buttonThemSach = new JButton();
+        GraphicFunctions.setLabel(themSach, contentPane, "THÊM SÁCH", 90, 20, 120, 20);
+        GraphicFunctions.setLabel(maSach, contentPane, "Mã sách", 20, 60, 120, 20);
+        GraphicFunctions.setLabel(tenSach, contentPane, "Tên sách", 20, 100, 120, 20);
+        GraphicFunctions.setLabel(viTri, contentPane, "Vị trí", 20, 140, 120, 20);
+        GraphicFunctions.setTextField(nhapMaSach, contentPane, 100, 60, 120, 20);
+        GraphicFunctions.setTextField(nhapTenSach, contentPane, 100, 100, 120, 20);
+        GraphicFunctions.setTextField(nhapViTri, contentPane, 100, 140, 120, 20);
+        GraphicFunctions.setButton(buttonThemSach, contentPane, "THÊM SÁCH", 55, 180, 150, 30);
+
+        JLabel xoaSach = new JLabel();
+        JLabel maTheSachXoa = new JLabel();
+        JTextField nhapMaTheSachDeXoa = new JTextField();
+        JButton buttonXoaSach = new JButton();
+        GraphicFunctions.setLabel(xoaSach, contentPane, "XÓA SÁCH", 90, 250, 120, 20);
+        GraphicFunctions.setLabel(maTheSachXoa, contentPane, "Mã sách", 20, 290, 120, 20);
+        GraphicFunctions.setTextField(nhapMaTheSachDeXoa, contentPane, 100, 290, 120, 20);
+        GraphicFunctions.setButton(buttonXoaSach, contentPane, "XÓA SÁCH", 55, 330, 150, 30);
+
+        JTable table = new JTable();
+        String column[] = { "MÃ SÁCH", "TÊN SÁCH", "VỊ TRÍ", "TRẠNG THÁI" };
+        String data[][] = {
+                { "1", "OOP with JAVA", "Kệ 1 ngăn 1", "Cho mượn được" },
+                { "2", "Python program language", "Kệ 1 ngăn 2", "Cho mượn được" } };
 
         GraphicFunctions.setTable(table, contentPane, column, data);
         JScrollPane scrollPane = new JScrollPane(table);
