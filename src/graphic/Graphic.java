@@ -39,26 +39,6 @@ public class Graphic {
         mainFrame.setVisible(true);
     }
 
-    public static void notification(String string, JFrame frame, JPanel contentPane) {
-        frame = new JFrame("Thông báo!");
-        frame.pack();
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int height = screenSize.height;
-        int width = screenSize.width;
-        frame.setSize(width / 5, height / 7);
-        frame.setLocationRelativeTo(null);
-        contentPane = new JPanel();
-        contentPane.setLayout(null);
-        frame.add(contentPane);
-        frame.setVisible(true);
-
-        JLabel notification = new JLabel();
-        JButton confirm = new JButton();
-        GraphicFunctions.setLabel(notification, contentPane, "Thông báo: " + string,
-                10, 0, 300, 50);
-    }
-
     public void mainMenu() {
         mainFrame.setVisible(false);
         prepareGUI();
@@ -107,7 +87,6 @@ public class Graphic {
     public void docGia() {
         mainFrame.setVisible(false);
         prepareGUI();
-
         JLabel themDocGia = new JLabel();
         JLabel maThe = new JLabel();
         JLabel ho = new JLabel();
@@ -130,7 +109,7 @@ public class Graphic {
         GraphicFunctions.setButton(buttonThemDocGia, contentPane, "THÊM ĐỘC GIẢ", 55, 220, 150, 30);
         buttonThemDocGia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Function.themDocGia(mainFrame, contentPane, nhapMaThe.getText(),
+                Function.themDocGia(buttonThemDocGia, nhapMaThe.getText(),
                         nhapHo.getText(), nhapTen.getText(),
                         nhapGioiTinh.getText());
             }
