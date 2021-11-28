@@ -1,6 +1,9 @@
 package graphic;
 
 import javax.swing.*;
+
+import function.Function;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -19,7 +22,7 @@ public class Graphic {
     public void prepareGUI() {
         mainFrame = new JFrame("Đồ án kết môn OOP với JAVA");
         mainFrame.pack();
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = screenSize.height;
         int width = screenSize.width;
@@ -36,81 +39,70 @@ public class Graphic {
         mainFrame.setVisible(true);
     }
 
+    public static void notification(String string, JFrame frame, JPanel contentPane) {
+        frame = new JFrame("Thông báo!");
+        frame.pack();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int height = screenSize.height;
+        int width = screenSize.width;
+        frame.setSize(width / 5, height / 7);
+        frame.setLocationRelativeTo(null);
+        contentPane = new JPanel();
+        contentPane.setLayout(null);
+        frame.add(contentPane);
+        frame.setVisible(true);
+
+        JLabel notification = new JLabel();
+        JButton confirm = new JButton();
+        GraphicFunctions.setLabel(notification, contentPane, "Thông báo: " + string,
+                10, 0, 300, 50);
+    }
+
     public void mainMenu() {
         mainFrame.setVisible(false);
         prepareGUI();
         JLabel hoTen = new JLabel();
         JLabel MSSV = new JLabel();
         JLabel lop = new JLabel();
-        JButton DocGia = new JButton();
-        JButton DanhMucSach = new JButton();
-        JButton MuonTraSach = new JButton();
-        JButton Thoat = new JButton();
+        JButton docGia = new JButton();
+        JButton danhMucSach = new JButton();
+        JButton muonTraSach = new JButton();
+        JButton quit = new JButton();
 
         GraphicFunctions.setLabel(hoTen, contentPane, "Họ tên: Đặng Lê Quốc Bảo - Nguyễn Hữu Phước", 315, 10, 300, 50);
         GraphicFunctions.setLabel(MSSV, contentPane, "MSSV: N19DCCN014 - N19DCCN145", 350, 40, 300, 50);
         GraphicFunctions.setLabel(lop, contentPane, "Lớp: D19CQCN02-N - D19CQCN03-N", 350, 70, 300, 50);
 
-        GraphicFunctions.setButton(DocGia, contentPane, "ĐỘC GIẢ", 350, 140, 200, 50);
-        GraphicFunctions.setButton(DanhMucSach, contentPane, "DANH MỤC SÁCH", 350, 220, 200, 50);
-        GraphicFunctions.setButton(MuonTraSach, contentPane, "MƯỢN TRẢ SÁCH", 350, 300, 200, 50);
-        GraphicFunctions.setButton(Thoat, contentPane, "THOÁT", 360, 400, 180, 40);
+        GraphicFunctions.setButton(docGia, contentPane, "ĐỘC GIẢ", 350, 140, 200, 50);
+        GraphicFunctions.setButton(danhMucSach, contentPane, "DANH MỤC SÁCH", 350, 220, 200, 50);
+        GraphicFunctions.setButton(muonTraSach, contentPane, "MƯỢN TRẢ SÁCH", 350, 300, 200, 50);
+        GraphicFunctions.setButton(quit, contentPane, "THOÁT", 360, 400, 180, 40);
 
-        DocGia.addActionListener(new ActionListener() {
+        docGia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 docGia();
             }
         });
-        DanhMucSach.addActionListener(new ActionListener() {
+        danhMucSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 danhMucSach();
             }
         });
-        MuonTraSach.addActionListener(new ActionListener() {
+        muonTraSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 muonTraSach();
             }
         });
-        Thoat.addActionListener(new ActionListener() {
+        quit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainFrame.setVisible(false);
+                // notification("Hello", mainFrame, contentPane);
             }
         });
 
         mainFrame.setVisible(true);
     }
-
-    // public void docGia() {
-    // mainFrame.setVisible(false);
-    // prepareGUI();
-    // JButton DanhSachDocGia = new JButton();
-    // JButton ChinhSuaDocGia = new JButton();
-    // JButton goBack = new JButton();
-
-    // GraphicFunctions.setButton(DanhSachDocGia, contentPane, "DANH SÁCH ĐỘC GIẢ",
-    // 350, 120, 200, 50);
-    // DanhSachDocGia.addActionListener(new ActionListener() {
-    // public void actionPerformed(ActionEvent e) {
-    // danhSachDocGia();
-    // }
-    // });
-
-    // GraphicFunctions.setButton(ChinhSuaDocGia, contentPane, "CHỈNH SỬA ĐỘC GIẢ ",
-    // 350, 225, 200, 50);
-    // ChinhSuaDocGia.addActionListener(new ActionListener() {
-    // public void actionPerformed(ActionEvent e) {
-    // System.out.println("ChinhSuaDocGia");
-    // }
-    // });
-
-    // GraphicFunctions.setButton(goBack, contentPane, "QUAY LẠI", 350, 330, 200,
-    // 50);
-    // goBack.addActionListener(new ActionListener() {
-    // public void actionPerformed(ActionEvent e) {
-    // mainMenu();
-    // }
-    // });
-    // }
 
     public void docGia() {
         mainFrame.setVisible(false);
@@ -136,6 +128,13 @@ public class Graphic {
         GraphicFunctions.setTextField(nhapTen, contentPane, 100, 140, 120, 20);
         GraphicFunctions.setTextField(nhapGioiTinh, contentPane, 100, 180, 120, 20);
         GraphicFunctions.setButton(buttonThemDocGia, contentPane, "THÊM ĐỘC GIẢ", 55, 220, 150, 30);
+        buttonThemDocGia.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Function.themDocGia(mainFrame, contentPane, nhapMaThe.getText(),
+                        nhapHo.getText(), nhapTen.getText(),
+                        nhapGioiTinh.getText());
+            }
+        });
 
         JLabel xoaDocGia = new JLabel();
         JLabel maTheXoa = new JLabel();
