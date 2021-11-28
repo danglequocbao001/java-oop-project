@@ -50,9 +50,9 @@ public class Graphic {
         JButton muonTraSach = new JButton();
         JButton quit = new JButton();
 
-        GraphicFunctions.setLabel(hoTen, contentPane, "Họ tên: Đặng Lê Quốc Bảo - Nguyễn Hữu Phước", 315, 10, 300, 50);
-        GraphicFunctions.setLabel(MSSV, contentPane, "MSSV: N19DCCN014 - N19DCCN145", 350, 40, 300, 50);
-        GraphicFunctions.setLabel(lop, contentPane, "Lớp: D19CQCN02-N - D19CQCN03-N", 350, 70, 300, 50);
+        GraphicFunctions.setLabel(hoTen, contentPane, "Họ tên: Đặng Lê Quốc Bảo - Nguyễn Ngọc Thanh Danh", 315, 10, 300, 50);
+        GraphicFunctions.setLabel(MSSV, contentPane, "MSSV: N19DCCN014 - N19DCCN027", 350, 40, 300, 50);
+        GraphicFunctions.setLabel(lop, contentPane, "Lớp: D19CQCN02-N - D19CQCN02-N", 350, 70, 300, 50);
 
         GraphicFunctions.setButton(docGia, contentPane, "ĐỘC GIẢ", 350, 140, 200, 50);
         GraphicFunctions.setButton(danhMucSach, contentPane, "DANH MỤC SÁCH", 350, 220, 200, 50);
