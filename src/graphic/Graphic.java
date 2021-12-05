@@ -50,7 +50,8 @@ public class Graphic {
         JButton muonTraSach = new JButton();
         JButton quit = new JButton();
 
-        GraphicFunctions.setLabel(hoTen, contentPane, "Họ tên: Đặng Lê Quốc Bảo - Nguyễn Ngọc Thanh Danh", 315, 10, 300, 50);
+        GraphicFunctions.setLabel(hoTen, contentPane, "Họ tên: Đặng Lê Quốc Bảo - Nguyễn Ngọc Thanh Danh", 295, 10, 350,
+                50);
         GraphicFunctions.setLabel(MSSV, contentPane, "MSSV: N19DCCN014 - N19DCCN027", 350, 40, 300, 50);
         GraphicFunctions.setLabel(lop, contentPane, "Lớp: D19CQCN02-N - D19CQCN02-N", 350, 70, 300, 50);
 
@@ -97,7 +98,8 @@ public class Graphic {
         JTextField nhapTen = new JTextField();
         JTextField nhapGioiTinh = new JTextField();
         JButton buttonThemDocGia = new JButton();
-        GraphicFunctions.setLabel(themDocGia, contentPane, "THÊM ĐỘC GIẢ", 90, 20, 120, 20);
+        JButton buttonSuaDocGia = new JButton();
+        GraphicFunctions.setLabel(themDocGia, contentPane, "THÊM/SỬA ĐỘC GIẢ", 90, 20, 120, 20);
         GraphicFunctions.setLabel(maThe, contentPane, "Mã thẻ", 20, 60, 120, 20);
         GraphicFunctions.setLabel(ho, contentPane, "Họ", 20, 100, 120, 20);
         GraphicFunctions.setLabel(ten, contentPane, "Tên", 20, 140, 120, 20);
@@ -106,7 +108,8 @@ public class Graphic {
         GraphicFunctions.setTextField(nhapHo, contentPane, 100, 100, 120, 20);
         GraphicFunctions.setTextField(nhapTen, contentPane, 100, 140, 120, 20);
         GraphicFunctions.setTextField(nhapGioiTinh, contentPane, 100, 180, 120, 20);
-        GraphicFunctions.setButton(buttonThemDocGia, contentPane, "THÊM ĐỘC GIẢ", 55, 220, 150, 30);
+        GraphicFunctions.setButton(buttonThemDocGia, contentPane, "THÊM ĐỘC GIẢ", 20, 220, 120, 30);
+        GraphicFunctions.setButton(buttonSuaDocGia, contentPane, "SỬA ĐỘC GIẢ", 150, 220, 120, 30);
         buttonThemDocGia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Function.themDocGia(buttonThemDocGia, nhapMaThe.getText(),
@@ -115,14 +118,16 @@ public class Graphic {
             }
         });
 
-        JLabel xoaDocGia = new JLabel();
+        JLabel khoaXoaDocGia = new JLabel();
         JLabel maTheXoa = new JLabel();
         JTextField nhapMaTheDeXoa = new JTextField();
+        JButton buttonKhoaDocGia = new JButton();
         JButton buttonXoaDocGia = new JButton();
-        GraphicFunctions.setLabel(xoaDocGia, contentPane, "XÓA ĐỘC GIẢ", 90, 280, 120, 20);
+        GraphicFunctions.setLabel(khoaXoaDocGia, contentPane, "KHÓA/XÓA ĐỘC GIẢ", 90, 280, 120, 20);
         GraphicFunctions.setLabel(maTheXoa, contentPane, "Mã thẻ", 20, 310, 120, 20);
         GraphicFunctions.setTextField(nhapMaTheDeXoa, contentPane, 100, 310, 120, 20);
-        GraphicFunctions.setButton(buttonXoaDocGia, contentPane, "XÓA ĐỘC GIẢ", 55, 350, 150, 30);
+        GraphicFunctions.setButton(buttonKhoaDocGia, contentPane, "KHÓA ĐỘC GIẢ", 20, 350, 120, 30);
+        GraphicFunctions.setButton(buttonXoaDocGia, contentPane, "XÓA ĐỘC GIẢ", 150, 350, 120, 30);
 
         JTable table = new JTable();
         String column[] = { "MÃ THẺ", "HỌ", "TÊN", "GIỚI TÍNH", "TRẠNG THÁI" };
@@ -156,23 +161,27 @@ public class Graphic {
         JTextField nhapTenSach = new JTextField();
         JTextField nhapViTri = new JTextField();
         JButton buttonThemSach = new JButton();
-        GraphicFunctions.setLabel(themSach, contentPane, "THÊM SÁCH", 90, 20, 120, 20);
+        JButton buttonSuaSach = new JButton();
+        GraphicFunctions.setLabel(themSach, contentPane, "THÊM/SỬA SÁCH", 90, 20, 120, 20);
         GraphicFunctions.setLabel(maSach, contentPane, "Mã sách", 20, 60, 120, 20);
         GraphicFunctions.setLabel(tenSach, contentPane, "Tên sách", 20, 100, 120, 20);
         GraphicFunctions.setLabel(viTri, contentPane, "Vị trí", 20, 140, 120, 20);
         GraphicFunctions.setTextField(nhapMaSach, contentPane, 100, 60, 120, 20);
         GraphicFunctions.setTextField(nhapTenSach, contentPane, 100, 100, 120, 20);
         GraphicFunctions.setTextField(nhapViTri, contentPane, 100, 140, 120, 20);
-        GraphicFunctions.setButton(buttonThemSach, contentPane, "THÊM SÁCH", 55, 180, 150, 30);
+        GraphicFunctions.setButton(buttonThemSach, contentPane, "THÊM SÁCH", 20, 180, 120, 30);
+        GraphicFunctions.setButton(buttonSuaSach, contentPane, "SỬA SÁCH", 150, 180, 120, 30);
 
-        JLabel xoaSach = new JLabel();
+        JLabel khoaXoaSach = new JLabel();
         JLabel maTheSachXoa = new JLabel();
         JTextField nhapMaTheSachDeXoa = new JTextField();
+        JButton buttonKhoaSach = new JButton();
         JButton buttonXoaSach = new JButton();
-        GraphicFunctions.setLabel(xoaSach, contentPane, "XÓA SÁCH", 90, 250, 120, 20);
+        GraphicFunctions.setLabel(khoaXoaSach, contentPane, "KHÓA/XÓA SÁCH", 90, 250, 120, 20);
         GraphicFunctions.setLabel(maTheSachXoa, contentPane, "Mã sách", 20, 290, 120, 20);
         GraphicFunctions.setTextField(nhapMaTheSachDeXoa, contentPane, 100, 290, 120, 20);
-        GraphicFunctions.setButton(buttonXoaSach, contentPane, "XÓA SÁCH", 55, 330, 150, 30);
+        GraphicFunctions.setButton(buttonKhoaSach, contentPane, "KHÓA SÁCH", 20, 330, 120, 30);
+        GraphicFunctions.setButton(buttonXoaSach, contentPane, "XÓA SÁCH", 150, 330, 120, 30);
 
         JTable table = new JTable();
         String column[] = { "MÃ SÁCH", "TÊN SÁCH", "VỊ TRÍ", "TRẠNG THÁI" };
@@ -205,6 +214,7 @@ public class Graphic {
         JTextField nhapMaSach = new JTextField();
         JButton buttonMuonSach = new JButton();
         JButton buttonTraSach = new JButton();
+        JButton buttonMatSach = new JButton();
         GraphicFunctions.setLabel(muonTraSach, contentPane, "MƯỢN TRẢ SÁCH", 90, 40, 120, 20);
         GraphicFunctions.setLabel(maDocGia, contentPane, "Mã độc giả", 20, 100, 120, 20);
         GraphicFunctions.setLabel(maSach, contentPane, "Mã sách", 20, 150, 120, 20);
@@ -212,6 +222,7 @@ public class Graphic {
         GraphicFunctions.setTextField(nhapMaDocGia, contentPane, 100, 150, 120, 20);
         GraphicFunctions.setButton(buttonMuonSach, contentPane, "MƯỢN SÁCH", 20, 210, 120, 30);
         GraphicFunctions.setButton(buttonTraSach, contentPane, "TRẢ SÁCH", 170, 210, 120, 30);
+        GraphicFunctions.setButton(buttonMatSach, contentPane, "LÀM MẤT SÁCH", 80, 270, 150, 30);
 
         JTable table = new JTable();
         String column[] = { "MÃ SÁCH", "TÊN SÁCH", "VỊ TRÍ", "NGƯỜI MƯỢN" };
