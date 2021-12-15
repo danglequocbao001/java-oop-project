@@ -15,5 +15,4 @@ public class Function {
         System.out.println(docGia);
         return docGia;
     }
-
 }
