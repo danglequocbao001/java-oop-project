@@ -41,6 +41,19 @@ public class Graphic {
         mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
+    public void run() {
+        mainFrame.setVisible(false);
+        prepareGUI();
+        JButton buttonLRun = new JButton();
+        GraphicFunctions.setButton(buttonLRun, contentPane, "CHẠY CHƯƠNG TRÌNH", 830, 400, 300, 150);
+
+        buttonLRun.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                login();
+            }
+        });
+    }
+
     public void login() {
         mainFrame.setVisible(false);
         prepareGUI();
@@ -310,6 +323,6 @@ public class Graphic {
 
     public static void main(String[] args) {
         Graphic Program = new Graphic();
-        Program.login();
+        Program.run();
     }
 }
