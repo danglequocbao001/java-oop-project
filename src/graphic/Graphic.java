@@ -92,8 +92,6 @@ public class Graphic {
         buttonLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String password = new String(nhapMatKhau.getPassword());
-                System.out.println(nhapTaiKhoan.getText());
-                System.out.println(password);
                 if (nhapTaiKhoan.getText().equals("") || password.equals("")) {
                     JOptionPane.showMessageDialog(buttonLogin, "Không được bỏ trống trường nhập liệu!");
                 } else if (nhapTaiKhoan.getText().equals("admin") && password.equals("admin")) {
