@@ -1,6 +1,7 @@
 package function;
 
 import javax.swing.*;
+
 import schema.DocGia;
 
 public class Function {
@@ -15,5 +16,4 @@ public class Function {
         System.out.println(docGia);
         return docGia;
     }
-
 }
