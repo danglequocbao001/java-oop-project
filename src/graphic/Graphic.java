@@ -67,8 +67,14 @@ public class Graphic {
         GraphicFunctions.setLabel(matKhau, contentPane, "MẬT KHẨU", 845, 430, 300, 50);
         GraphicFunctions.setTextField(nhapTaiKhoan, contentPane, 950, 365, 150, 20);
         GraphicFunctions.setPasswordField(nhapMatKhau, contentPane, 950, 445, 150, 20);
-        GraphicFunctions.setButton(buttonExit, contentPane, "THOÁT", 815, 500, 150, 40);
-        GraphicFunctions.setButton(buttonLogin, contentPane, "ĐĂNG NHẬP", 975, 500, 150, 40);
+        GraphicFunctions.setButton(buttonExit, contentPane, "THOÁT", 815, 530, 150, 40);
+        GraphicFunctions.setButton(buttonLogin, contentPane, "ĐĂNG NHẬP", 975, 530, 150, 40);
+
+        buttonExit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.setVisible(false);
+            }
+        });
 
         buttonLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -97,6 +103,7 @@ public class Graphic {
         JButton docGia = new JButton();
         JButton danhMucSach = new JButton();
         JButton muonTraSach = new JButton();
+        JButton logout = new JButton();
         JButton exit = new JButton();
 
         GraphicFunctions.setLabel(quanLyThuVien, contentPane, "QUẢN LÝ THƯ VIỆN SÁCH", 750, 100, 600, 50);
@@ -110,7 +117,8 @@ public class Graphic {
         GraphicFunctions.setButton(docGia, contentPane, "ĐỘC GIẢ", 855, 320, 240, 70);
         GraphicFunctions.setButton(danhMucSach, contentPane, "DANH MỤC SÁCH", 855, 420, 240, 70);
         GraphicFunctions.setButton(muonTraSach, contentPane, "MƯỢN TRẢ SÁCH", 855, 520, 240, 70);
-        GraphicFunctions.setButton(exit, contentPane, "THOÁT", 855, 620, 240, 70);
+        GraphicFunctions.setButton(logout, contentPane, "ĐĂNG XUẤT", 700, 660, 240, 70);
+        GraphicFunctions.setButton(exit, contentPane, "THOÁT", 1000, 660, 240, 70);
 
         docGia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -127,10 +135,14 @@ public class Graphic {
                 muonTraSach();
             }
         });
+        logout.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                login();
+            }
+        });
         exit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainFrame.setVisible(false);
-                // notification("Hello", mainFrame, contentPane);
             }
         });
 
