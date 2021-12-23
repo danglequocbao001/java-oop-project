@@ -1,12 +1,12 @@
-package function;
+package com.s3rd.java.function;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
-import schema.DocGia;
+import com.s3rd.java.schema.DocGia;
 
 public class Function {
-    public static DocGia themDocGia(JButton button, String maThe, String ho, String ten,
-            String gioiTinh) {
+    public static DocGia themDocGia(JButton button, String maThe, String ho, String ten, String gioiTinh) {
         DocGia docGia = new DocGia();
         if (maThe.equals("") || ho.equals("") || ten.equals("") || gioiTinh.equals("")) {
             JOptionPane.showMessageDialog(button, "Không được bỏ trống trường nhập liệu!");

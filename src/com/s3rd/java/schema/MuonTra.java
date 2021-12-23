@@ -1,4 +1,4 @@
-package schema;
+package com.s3rd.java.schema;
 
 public class MuonTra {
     private String maSach;

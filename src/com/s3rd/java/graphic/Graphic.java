@@ -1,9 +1,7 @@
-package graphic;
+package com.s3rd.java.graphic;
 
 import javax.swing.*;
-
-import function.Function;
-
+import com.s3rd.java.function.Function;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -317,10 +315,5 @@ public class Graphic {
                 mainMenu();
             }
         });
-    }
-
-    public static void main(String[] args) {
-        Graphic Program = new Graphic();
-        Program.mainMenu();
     }
 }

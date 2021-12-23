@@ -1,4 +1,4 @@
-package graphic;
+package com.s3rd.java.graphic;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
