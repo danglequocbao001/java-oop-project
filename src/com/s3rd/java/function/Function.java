@@ -3,6 +3,7 @@ package com.s3rd.java.function;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import com.s3rd.java.config.GlobalVariable;
 import com.s3rd.java.schema.DocGia;
 
 public class Function {
@@ -10,7 +11,7 @@ public class Function {
             String gioiTinh) {
         DocGia docGia = new DocGia();
         if (maThe.equals("") || ho.equals("") || ten.equals("") || gioiTinh.equals("")) {
-            JOptionPane.showMessageDialog(button, "Không được bỏ trống trường nhập liệu!");
+            JOptionPane.showMessageDialog(button, GlobalVariable.NOT_BLANK);
         } else {
             docGia.themDocGia(maThe, ho, ten, gioiTinh);
         }

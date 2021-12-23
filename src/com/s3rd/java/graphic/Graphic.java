@@ -1,6 +1,8 @@
 package com.s3rd.java.graphic;
 
 import javax.swing.*;
+
+import com.s3rd.java.config.GlobalVariable;
 import com.s3rd.java.function.Function;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -67,7 +69,7 @@ public class Graphic {
         JButton buttonLogin = new JButton();
         JButton buttonExit = new JButton();
 
-        GraphicFunctions.setLabel(quanLyThuVien, contentPane, "QUẢN LÝ THƯ VIỆN SÁCH", 750, 100, 600, 50);
+        GraphicFunctions.setLabel(quanLyThuVien, contentPane, GlobalVariable.MAIN_TITLE, 750, 100, 600, 50);
         quanLyThuVien.setFont(bigBold);
         GraphicFunctions.setLabel(hoTen, contentPane, "Họ tên: Đặng Lê Quốc Bảo - Nguyễn Ngọc Thanh Danh", 780, 180,
                 550,
@@ -78,7 +80,7 @@ public class Graphic {
         GraphicFunctions.setLabel(matKhau, contentPane, "MẬT KHẨU", 845, 430, 300, 50);
         GraphicFunctions.setTextField(nhapTaiKhoan, contentPane, 950, 365, 150, 20);
         GraphicFunctions.setPasswordField(nhapMatKhau, contentPane, 950, 445, 150, 20);
-        GraphicFunctions.setButton(buttonExit, contentPane, "THOÁT", 815, 530, 150, 40);
+        GraphicFunctions.setButton(buttonExit, contentPane, GlobalVariable.QUIT, 815, 530, 150, 40);
         GraphicFunctions.setButton(buttonLogin, contentPane, "ĐĂNG NHẬP", 975, 530, 150, 40);
 
         buttonExit.addActionListener(new ActionListener() {
@@ -91,11 +93,11 @@ public class Graphic {
             public void actionPerformed(ActionEvent e) {
                 String password = new String(nhapMatKhau.getPassword());
                 if (nhapTaiKhoan.getText().equals("") || password.equals("")) {
-                    JOptionPane.showMessageDialog(buttonLogin, "Không được bỏ trống trường nhập liệu!");
+                    JOptionPane.showMessageDialog(buttonLogin, GlobalVariable.NOT_BLANK);
                 } else if (nhapTaiKhoan.getText().equals("admin") && password.equals("admin")) {
                     mainMenu();
                 } else {
-                    JOptionPane.showMessageDialog(buttonLogin, "Tài khoản hoặc mật khẩu không chính xác!");
+                    JOptionPane.showMessageDialog(buttonLogin, GlobalVariable.NOT_CORRECT_ACCOUNT);
                 }
             }
         });
@@ -127,7 +129,7 @@ public class Graphic {
         GraphicFunctions.setButton(danhMucSach, contentPane, "DANH MỤC SÁCH", 855, 420, 240, 70);
         GraphicFunctions.setButton(muonTraSach, contentPane, "MƯỢN TRẢ SÁCH", 855, 520, 240, 70);
         GraphicFunctions.setButton(logout, contentPane, "ĐĂNG XUẤT", 700, 660, 240, 70);
-        GraphicFunctions.setButton(exit, contentPane, "THOÁT", 1000, 660, 240, 70);
+        GraphicFunctions.setButton(exit, contentPane, GlobalVariable.QUIT, 1000, 660, 240, 70);
 
         docGia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -214,7 +216,7 @@ public class Graphic {
         contentPane.add(scrollPane);
 
         JButton goBack = new JButton();
-        GraphicFunctions.setButton(goBack, contentPane, "QUAY LẠI", 350, 840, 230, 60);
+        GraphicFunctions.setButton(goBack, contentPane, GlobalVariable.GO_BACK, 350, 840, 230, 60);
         goBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainMenu();
@@ -268,7 +270,7 @@ public class Graphic {
         contentPane.add(scrollPane);
 
         JButton goBack = new JButton();
-        GraphicFunctions.setButton(goBack, contentPane, "QUAY LẠI", 350, 840, 230, 60);
+        GraphicFunctions.setButton(goBack, contentPane, GlobalVariable.GO_BACK, 350, 840, 230, 60);
         goBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainMenu();
@@ -309,7 +311,7 @@ public class Graphic {
         contentPane.add(scrollPane);
 
         JButton goBack = new JButton();
-        GraphicFunctions.setButton(goBack, contentPane, "QUAY LẠI", 350, 840, 230, 60);
+        GraphicFunctions.setButton(goBack, contentPane, GlobalVariable.GO_BACK, 350, 840, 230, 60);
         goBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainMenu();
