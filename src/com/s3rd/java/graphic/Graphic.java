@@ -316,4 +316,9 @@ public class Graphic {
             }
         });
     }
+
+    public static void main(String[] args) {
+        Graphic Program = new Graphic();
+        Program.mainMenu();
+    }
 }

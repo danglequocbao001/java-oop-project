@@ -5,19 +5,18 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class PostgreSql {
-        private DatabaseConfiguration config;
-        public Connection connection;
+    private DatabaseConfiguration config;
+    public Connection connection;
 
-        public PostgreSql() {
-                this.config = new DatabaseConfiguration();
-        }
+    public PostgreSql() {
+        this.config = new DatabaseConfiguration();
+    }
 
-        public Connection connect() throws SQLException {
-                this.connection = DriverManager.getConnection(
-                        this.config.toString(),
-                        this.config.username,
-                        this.config.password
-                );
-                return this.connection;
-        }
+    public Connection connect() throws SQLException {
+        this.connection = DriverManager.getConnection(
+                this.config.toString(),
+                this.config.username,
+                this.config.password);
+        return this.connection;
+    }
 }
