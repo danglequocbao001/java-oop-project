@@ -37,4 +37,12 @@ public class GraphicFunctions {
         passwordField.setBounds(x, y, width, height);
         contentPage.add(passwordField);
     }
+
+    public static void setRadioButton(JRadioButton radioButton, JPanel contentPane, String text, int x, int y,
+            int width,
+            int height) {
+        radioButton.setText(text);
+        radioButton.setBounds(x, y - 5, width, height);
+        contentPane.add(radioButton);
+    }
 }

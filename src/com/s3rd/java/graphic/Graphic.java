@@ -168,10 +168,23 @@ public class Graphic {
         JLabel ho = new JLabel();
         JLabel ten = new JLabel();
         JLabel gioiTinh = new JLabel();
+        JLabel trangThai = new JLabel();
         JTextField nhapMaThe = new JTextField();
         JTextField nhapHo = new JTextField();
         JTextField nhapTen = new JTextField();
         JTextField nhapGioiTinh = new JTextField();
+        JRadioButton khoa = new JRadioButton();
+        JRadioButton hoatDong = new JRadioButton();
+        JRadioButton nam = new JRadioButton();
+        JRadioButton nu = new JRadioButton();
+        JRadioButton khac = new JRadioButton();
+        ButtonGroup Status = new ButtonGroup();
+        Status.add(khoa);
+        Status.add(hoatDong);
+        ButtonGroup Gender = new ButtonGroup();
+        Gender.add(nam);
+        Gender.add(nu);
+        Gender.add(khac);
         JButton buttonThemDocGia = new JButton();
         JButton buttonSuaDocGia = new JButton();
         GraphicFunctions.setLabel(themDocGia, contentPane, "THÊM/SỬA ĐỘC GIẢ", 440, 170, 150, 20);
@@ -179,12 +192,15 @@ public class Graphic {
         GraphicFunctions.setLabel(ho, contentPane, "Họ", 370, 270, 120, 20);
         GraphicFunctions.setLabel(ten, contentPane, "Tên", 370, 310, 120, 20);
         GraphicFunctions.setLabel(gioiTinh, contentPane, "Giới tính", 370, 350, 120, 20);
+        GraphicFunctions.setLabel(trangThai, contentPane, "Trạng thái", 370, 390, 120, 20);
         GraphicFunctions.setTextField(nhapMaThe, contentPane, 450, 230, 150, 20);
         GraphicFunctions.setTextField(nhapHo, contentPane, 450, 270, 150, 20);
         GraphicFunctions.setTextField(nhapTen, contentPane, 450, 310, 150, 20);
         GraphicFunctions.setTextField(nhapGioiTinh, contentPane, 450, 350, 150, 20);
-        GraphicFunctions.setButton(buttonThemDocGia, contentPane, "THÊM ĐỘC GIẢ", 350, 400, 150, 40);
-        GraphicFunctions.setButton(buttonSuaDocGia, contentPane, "SỬA ĐỘC GIẢ", 520, 400, 150, 40);
+        GraphicFunctions.setRadioButton(hoatDong, contentPane, "Hoạt động", 460, 390, 170, 30);
+        GraphicFunctions.setRadioButton(khoa, contentPane, "Khóa", 460, 420, 170, 30);
+        GraphicFunctions.setButton(buttonThemDocGia, contentPane, "THÊM ĐỘC GIẢ", 350, 460, 150, 40);
+        GraphicFunctions.setButton(buttonSuaDocGia, contentPane, "SỬA ĐỘC GIẢ", 520, 460, 150, 40);
         buttonThemDocGia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Function.themDocGia(buttonThemDocGia, nhapMaThe.getText(),
@@ -198,20 +214,40 @@ public class Graphic {
         JTextField nhapMaTheDeXoa = new JTextField();
         JButton buttonKhoaDocGia = new JButton();
         JButton buttonXoaDocGia = new JButton();
-        GraphicFunctions.setLabel(khoaXoaDocGia, contentPane, "KHÓA/XÓA ĐỘC GIẢ", 440, 500, 150, 20);
-        GraphicFunctions.setLabel(maTheXoa, contentPane, "Mã thẻ", 370, 550, 120, 20);
-        GraphicFunctions.setTextField(nhapMaTheDeXoa, contentPane, 450, 550, 150, 20);
-        GraphicFunctions.setButton(buttonKhoaDocGia, contentPane, "KHÓA ĐỘC GIẢ", 350, 600, 150, 40);
-        GraphicFunctions.setButton(buttonXoaDocGia, contentPane, "XÓA ĐỘC GIẢ", 520, 600, 150, 40);
+        GraphicFunctions.setLabel(khoaXoaDocGia, contentPane, "KHÓA/XÓA ĐỘC GIẢ", 440, 560, 150, 20);
+        GraphicFunctions.setLabel(maTheXoa, contentPane, "Mã thẻ", 370, 610, 120, 20);
+        GraphicFunctions.setTextField(nhapMaTheDeXoa, contentPane, 450, 610, 150, 20);
+        GraphicFunctions.setButton(buttonKhoaDocGia, contentPane, "KHÓA ĐỘC GIẢ", 350, 660, 150, 40);
+        GraphicFunctions.setButton(buttonXoaDocGia, contentPane, "XÓA ĐỘC GIẢ", 520, 660, 150, 40);
 
-        JTable table = new JTable();
-        String column[] = { "MÃ THẺ", "HỌ", "TÊN", "GIỚI TÍNH", "TRẠNG THÁI" };
+        JTable tableDocGia = new JTable();
+        String firstRow[] = { "MÃ THẺ", "HỌ", "TÊN", "GIỚI TÍNH", "TRẠNG THÁI" };
         String data[][] = {
-                { "1", "Dang", "Bao", "Nam", "Đang hoạt động" },
-                { "2", "Dangg", "Bao0", "Nam", "Đang hoạt động" } };
+                { "1", "Dang", "Bao", "Nam", "Hoạt động" },
+                { "2", "Dangg", "Bao0", "Nam", "Hoạt động" },
+                { "3", "Nguyen", "Danh", "Nam", "Khóa" } };
+        tableDocGia.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int rowDocGia = tableDocGia.rowAtPoint(evt.getPoint());
+                nhapMaThe.setText((String) tableDocGia.getModel().getValueAt(rowDocGia, 0));
+                nhapHo.setText((String) tableDocGia.getModel().getValueAt(rowDocGia, 1));
+                nhapTen.setText((String) tableDocGia.getModel().getValueAt(rowDocGia, 2));
+                nhapGioiTinh.setText((String) tableDocGia.getModel().getValueAt(rowDocGia, 3));
+                if (((String) tableDocGia.getModel().getValueAt(rowDocGia, 4)).equals("Hoạt động")) {
+                    hoatDong.setSelected(true);
+                    khoa.setSelected(false);
 
-        GraphicFunctions.setTable(table, contentPane, column, data);
-        JScrollPane scrollPane = new JScrollPane(table);
+                } else {
+                    hoatDong.setSelected(false);
+                    khoa.setSelected(true);
+                }
+                nhapMaTheDeXoa.setText((String) tableDocGia.getModel().getValueAt(rowDocGia, 0));
+            }
+        });
+
+        GraphicFunctions.setTable(tableDocGia, contentPane, firstRow, data);
+        JScrollPane scrollPane = new JScrollPane(tableDocGia);
         scrollPane.setBounds(800, 100, 900, 800);
         contentPane.add(scrollPane);
 
