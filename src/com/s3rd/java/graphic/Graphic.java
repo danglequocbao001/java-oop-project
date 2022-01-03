@@ -209,6 +209,11 @@ public class Graphic {
                         "Nam");
             }
         });
+        buttonSuaDocGia.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("buttonSuaDocGia");
+            }
+        });
 
         JLabel khoaXoaDocGia = new JLabel();
         JLabel maTheXoa = new JLabel();
@@ -218,6 +223,12 @@ public class Graphic {
         GraphicFunctions.setLabel(maTheXoa, contentPane, "Mã thẻ", 370, 660, 120, 20);
         GraphicFunctions.setTextField(nhapMaTheDeXoa, contentPane, 450, 660, 150, 20);
         GraphicFunctions.setButton(buttonXoaDocGia, contentPane, "XÓA ĐỘC GIẢ", 440, 710, 150, 40);
+
+        buttonXoaDocGia.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("buttonXoaDocGia");
+            }
+        });
 
         JTable tableDocGia = new JTable();
         String firstRow[] = { "MÃ THẺ", "HỌ", "TÊN", "GIỚI TÍNH", "TRẠNG THÁI", "SỐ SÁCH ĐANG MƯỢN" };
@@ -310,6 +321,17 @@ public class Graphic {
         GraphicFunctions.setButton(buttonThemSach, contentPane, "THÊM SÁCH", 350, 460, 150, 40);
         GraphicFunctions.setButton(buttonSuaSach, contentPane, "SỬA SÁCH", 520, 460, 150, 40);
 
+        buttonThemSach.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("buttonThemSach");
+            }
+        });
+        buttonSuaSach.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("buttonSuaSach");
+            }
+        });
+
         JLabel khoaXoaSach = new JLabel();
         JLabel maTheSachXoa = new JLabel();
         JTextField nhapMaTheSachDeXoa = new JTextField();
@@ -318,6 +340,12 @@ public class Graphic {
         GraphicFunctions.setLabel(maTheSachXoa, contentPane, "Mã sách", 370, 600, 120, 20);
         GraphicFunctions.setTextField(nhapMaTheSachDeXoa, contentPane, 450, 600, 150, 20);
         GraphicFunctions.setButton(buttonXoaSach, contentPane, "XÓA SÁCH", 420, 650, 150, 40);
+
+        buttonXoaSach.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("buttonXoaSach");
+            }
+        });
 
         JTable tableDMS = new JTable();
         String firstRow[] = { "MÃ SÁCH", "TÊN SÁCH", "VỊ TRÍ", "TRẠNG THÁI" };
@@ -384,6 +412,24 @@ public class Graphic {
         GraphicFunctions.setButton(buttonMuonSach, contentPane, "MƯỢN SÁCH", 50, 360, 150, 40);
         GraphicFunctions.setButton(buttonTraSach, contentPane, "TRẢ SÁCH", 220, 360, 150, 40);
         GraphicFunctions.setButton(buttonMatSach, contentPane, "LÀM MẤT SÁCH", 140, 430, 150, 40);
+
+        buttonMuonSach.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("buttonMuonSach");
+            }
+        });
+
+        buttonTraSach.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("buttonTraSach");
+            }
+        });
+
+        buttonMatSach.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("buttonMatSach");
+            }
+        });
 
         JTable tableDocGia = new JTable();
         JTable tableMuonTra = new JTable();
