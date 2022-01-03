@@ -25,7 +25,7 @@ public class GraphicFunctions {
         contentPage.add(textField);
     }
 
-    public static void setTable(JTable table, JPanel contentPane, String column[], String data[][]) {
+    public static void setTable(JTable table, JPanel contentPane, String column[], Object data[][]) {
         Font bigBold = new Font("SansSerif", Font.PLAIN, 15);
         table.setModel(new DefaultTableModel(data, column));
         table.setFont(bigBold);

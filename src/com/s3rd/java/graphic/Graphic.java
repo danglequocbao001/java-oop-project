@@ -3,7 +3,11 @@ package com.s3rd.java.graphic;
 import javax.swing.*;
 
 import com.s3rd.java.config.GlobalVariable;
+import com.s3rd.java.database.PostgreSql;
 import com.s3rd.java.function.Function;
+import com.s3rd.java.models.Book;
+import com.s3rd.java.models.Reader;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -15,6 +19,7 @@ import java.awt.Font;
 public class Graphic {
     private JFrame mainFrame;
     private JPanel contentPane;
+    public PostgreSql connector;
 
     public Graphic() {
         prepareGUI();
@@ -232,12 +237,8 @@ public class Graphic {
 
         JTable tableDocGia = new JTable();
         String firstRow[] = { "MÃ THẺ", "HỌ", "TÊN", "GIỚI TÍNH", "TRẠNG THÁI", "SỐ SÁCH ĐANG MƯỢN" };
-        String data[][] = {
-                { "1", "Dang", "Bao", "Nam", "Hoạt động", "2" },
-                { "2", "Dangg", "Bao0", "Nam", "Hoạt động", "1" },
-                { "3", "Nguyen", "Danh", "Nam", "Khóa", "0" },
-                { "4", "Nguyen", "Thi", "Nữ", "Hoạt động", "0" },
-                { "5", "Nguyen", "Thanh", "Khác", "Khóa", "0" } };
+        Reader reader = new Reader(this.connector);
+        String[][] data = reader.getAll();
         tableDocGia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int rowDocGia = tableDocGia.rowAtPoint(evt.getPoint());
@@ -348,12 +349,9 @@ public class Graphic {
         });
 
         JTable tableDMS = new JTable();
+        Book book = new Book(this.connector);
         String firstRow[] = { "MÃ SÁCH", "TÊN SÁCH", "VỊ TRÍ", "TRẠNG THÁI" };
-        String data[][] = {
-                { "1", "OOP with JAVA", "Kệ 1 ngăn 1", "Cho mượn được" },
-                { "2", "Python program language", "Kệ 1 ngăn 2", "Cho mượn được" },
-                { "3", "Python program language", "Kệ 1 ngăn 1", "Đã khóa" },
-                { "4", "Python program language", "Kệ 1 ngăn 5", "Đã mất" } };
+        String[][] data = book.getAll();
         tableDMS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int rowDMS = tableDMS.rowAtPoint(evt.getPoint());
