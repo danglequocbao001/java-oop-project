@@ -9,10 +9,11 @@ public class Main {
         PostgreSql postgresql = new PostgreSql();
 
         try {
-        	postgresql.connect();
-        	program.connector = postgresql;
-        	program.mainMenu();
-        } catch (Exception e) {}
+            postgresql.connect();
+            program.connector = postgresql;
+            program.mainMenu();
+        } catch (Exception e) {
+        }
 
     }
 }
