@@ -42,6 +42,7 @@ public class GraphicFunctions {
             int width,
             int height) {
         radioButton.setText(text);
+        radioButton.setActionCommand(text);
         radioButton.setBounds(x, y - 5, width, height);
         contentPane.add(radioButton);
     }

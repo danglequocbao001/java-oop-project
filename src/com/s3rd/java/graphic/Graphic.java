@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import com.s3rd.java.config.GlobalVariable;
 import com.s3rd.java.database.PostgreSql;
-import com.s3rd.java.function.Function;
+// import com.s3rd.java.function.Function;
 import com.s3rd.java.models.Book;
 import com.s3rd.java.models.Reader;
 
@@ -209,9 +209,12 @@ public class Graphic {
         GraphicFunctions.setButton(buttonSuaDocGia, contentPane, "SỬA ĐỘC GIẢ", 520, 520, 150, 40);
         buttonThemDocGia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Function.themDocGia(buttonThemDocGia, nhapMaThe.getText(),
-                        nhapHo.getText(), nhapTen.getText(),
-                        "Nam");
+                // Function.themDocGia(buttonThemDocGia, nhapMaThe.getText(),
+                // nhapHo.getText(), nhapTen.getText(),
+                // "Nam");
+                System.out.println(nhapMaThe.getText() + " " + nhapHo.getText() + " " + nhapTen.getText() + " "
+                        + Gender.getSelection().getActionCommand() + " " + Status.getSelection().getActionCommand());
+
             }
         });
         buttonSuaDocGia.addActionListener(new ActionListener() {
@@ -231,7 +234,7 @@ public class Graphic {
 
         buttonXoaDocGia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("buttonXoaDocGia");
+                System.out.println(nhapMaThe.getText());
             }
         });
 
@@ -324,12 +327,14 @@ public class Graphic {
 
         buttonThemSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("buttonThemSach");
+                System.out.println(nhapMaSach.getText() + " " + nhapTenSach.getText() + " " + nhapViTri.getText() + " "
+                        + Status.getSelection().getActionCommand());
             }
         });
         buttonSuaSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("buttonSuaSach");
+                System.out.println(nhapMaSach.getText() + " " + nhapTenSach.getText() + " " + nhapViTri.getText() + " "
+                        + Status.getSelection().getActionCommand());
             }
         });
 
@@ -344,7 +349,7 @@ public class Graphic {
 
         buttonXoaSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("buttonXoaSach");
+                System.out.println(nhapMaSach.getText());
             }
         });
 
@@ -413,19 +418,21 @@ public class Graphic {
 
         buttonMuonSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("buttonMuonSach");
+                System.out.println(nhapMaDocGia.getText() + " " + nhapMaSach.getText());
             }
         });
 
         buttonTraSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("buttonTraSach");
+                System.out.println(nhapMaDocGia.getText() + " " + nhapMaSach.getText());
+
             }
         });
 
         buttonMatSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("buttonMatSach");
+                System.out.println(nhapMaDocGia.getText() + " " + nhapMaSach.getText());
+
             }
         });
 
