@@ -169,7 +169,7 @@ public class Graphic {
         JLabel ten = new JLabel();
         JLabel gioiTinh = new JLabel();
         JLabel trangThai = new JLabel();
-        JTextField nhapMaThe = new JTextField();
+        JLabel nhapMaThe = new JLabel();
         JTextField nhapHo = new JTextField();
         JTextField nhapTen = new JTextField();
         JRadioButton khoa = new JRadioButton();
@@ -192,7 +192,7 @@ public class Graphic {
         GraphicFunctions.setLabel(ten, contentPane, "Tên", 370, 310, 120, 20);
         GraphicFunctions.setLabel(gioiTinh, contentPane, "Giới tính", 370, 350, 120, 20);
         GraphicFunctions.setLabel(trangThai, contentPane, "Trạng thái", 370, 450, 120, 20);
-        GraphicFunctions.setTextField(nhapMaThe, contentPane, 450, 230, 150, 20);
+        GraphicFunctions.setLabel(nhapMaThe, contentPane, "Chọn vào bảng để hiển thị!", 450, 230, 200, 20);
         GraphicFunctions.setTextField(nhapHo, contentPane, 450, 270, 150, 20);
         GraphicFunctions.setTextField(nhapTen, contentPane, 450, 310, 150, 20);
         GraphicFunctions.setRadioButton(nam, contentPane, "Nam", 460, 350, 170, 30);
@@ -295,7 +295,7 @@ public class Graphic {
         JLabel tenSach = new JLabel();
         JLabel viTri = new JLabel();
         JLabel trangThai = new JLabel();
-        JTextField nhapMaSach = new JTextField();
+        JLabel nhapMaSach = new JLabel();
         JTextField nhapTenSach = new JTextField();
         JTextField nhapViTri = new JTextField();
         JRadioButton choMuonDuoc = new JRadioButton();
@@ -312,7 +312,7 @@ public class Graphic {
         GraphicFunctions.setLabel(tenSach, contentPane, "Tên sách", 370, 270, 120, 20);
         GraphicFunctions.setLabel(viTri, contentPane, "Vị trí", 370, 310, 120, 20);
         GraphicFunctions.setLabel(trangThai, contentPane, "Trạng thái", 370, 350, 120, 20);
-        GraphicFunctions.setTextField(nhapMaSach, contentPane, 450, 230, 150, 20);
+        GraphicFunctions.setLabel(nhapMaSach, contentPane, "Chọn vào bảng để hiển thị!", 450, 230, 200, 20);
         GraphicFunctions.setTextField(nhapTenSach, contentPane, 450, 270, 150, 20);
         GraphicFunctions.setTextField(nhapViTri, contentPane, 450, 310, 150, 20);
         GraphicFunctions.setRadioButton(choMuonDuoc, contentPane, "Cho mượn được", 460, 350, 170, 30);
