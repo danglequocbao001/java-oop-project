@@ -24,7 +24,7 @@ public class Graphic {
         prepareGUI();
 
     }
-    
+
     public void loadModels(PostgreSql connector) {
         this.connector = connector;
     }
@@ -214,23 +214,50 @@ public class Graphic {
         GraphicFunctions.setButton(buttonSuaDocGia, contentPane, "SỬA ĐỘC GIẢ", 520, 520, 150, 40);
         buttonThemDocGia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                reader.createOne(
-                    nhapHo.getText(),
-                    nhapTen.getText(),
-                    Gender.getSelection().getActionCommand(),
-                    Status.getSelection().getActionCommand()
-                );
+
+                if (nhapHo.getText().equals("") || nhapTen.getText().equals("")
+                        || Gender.getSelection().getActionCommand().equals("")) {
+                    JOptionPane.showMessageDialog(buttonThemDocGia, GlobalVariable.NOT_BLANK);
+                } else {
+                    int inputshowMessageDialog = JOptionPane.showOptionDialog(null,
+                            "Thêm độc giả mới với tên: " + nhapHo.getText() + " " + nhapTen.getText()
+                                    + " và giới tính: "
+                                    + Gender.getSelection().getActionCommand() + " ?",
+                            "Thông báo", JOptionPane.OK_CANCEL_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE, null, null, null);
+                    if (inputshowMessageDialog == JOptionPane.OK_OPTION) {
+                        reader.createOne(
+                                nhapHo.getText(),
+                                nhapTen.getText(),
+                                Gender.getSelection().getActionCommand(),
+                                "Hoạt động");
+                        docGia();
+                    }
+                }
             }
         });
         buttonSuaDocGia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                reader.updateOne(
-                    nhapMaThe.getText(),
-                    nhapHo.getText(),
-                    nhapTen.getText(),
-                    Gender.getSelection().getActionCommand(),
-                    Status.getSelection().getActionCommand()
-                );
+                if (nhapMaThe.getText().equals("") || nhapHo.getText().equals("") || nhapTen.getText().equals("")
+                        || Gender.getSelection().getActionCommand().equals("")
+                        || Status.getSelection().getActionCommand().equals("")) {
+                    JOptionPane.showMessageDialog(buttonSuaDocGia, GlobalVariable.NOT_BLANK);
+                } else {
+                    int inputshowMessageDialog = JOptionPane.showOptionDialog(null,
+                            "Bạn có muốn sửa lại độc giả có mã thẻ " + nhapMaThe.getText() + " này?",
+                            "Thông báo", JOptionPane.OK_CANCEL_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE, null, null, null);
+
+                    if (inputshowMessageDialog == JOptionPane.OK_OPTION) {
+                        reader.updateOne(
+                                nhapMaThe.getText(),
+                                nhapHo.getText(),
+                                nhapTen.getText(),
+                                Gender.getSelection().getActionCommand(),
+                                Status.getSelection().getActionCommand());
+                        docGia();
+                    }
+                }
             }
         });
 
@@ -245,7 +272,19 @@ public class Graphic {
 
         buttonXoaDocGia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                reader.deleteOne(nhapMaThe.getText());
+                if (nhapMaTheDeXoa.getText().equals("")) {
+                    JOptionPane.showMessageDialog(buttonXoaDocGia, GlobalVariable.NOT_BLANK);
+                } else {
+                    int inputshowMessageDialog = JOptionPane.showOptionDialog(null,
+                            "Bạn có muốn xóa độc giả có mã thẻ " + nhapMaTheDeXoa.getText() + " ?",
+                            "Thông báo", JOptionPane.OK_CANCEL_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE, null, null, null);
+
+                    if (inputshowMessageDialog == JOptionPane.OK_OPTION) {
+                        reader.deleteOne(nhapMaThe.getText());
+                        docGia();
+                    }
+                }
             }
         });
 
@@ -283,6 +322,7 @@ public class Graphic {
                     khoa.setSelected(true);
                 }
                 nhapMaTheDeXoa.setText((String) tableDocGia.getModel().getValueAt(rowDocGia, 0));
+                tableDocGia.getSelectionModel().clearSelection();
             }
         });
 
@@ -338,36 +378,72 @@ public class Graphic {
 
         buttonThemSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                book.createOne(
-                    nhapTenSach.getText(),
-                    nhapViTri.getText(),
-                    Status.getSelection().getActionCommand()
-                );
+
+                if (nhapTenSach.getText().equals("") || nhapViTri.getText().equals("")) {
+                    JOptionPane.showMessageDialog(buttonThemSach, GlobalVariable.NOT_BLANK);
+                } else {
+                    int inputshowMessageDialog = JOptionPane.showOptionDialog(null,
+                            "Thêm sách mới với tên: " + nhapTenSach.getText()
+                                    + " và vị trí: "
+                                    + nhapViTri.getText() + " ?",
+                            "Thông báo", JOptionPane.OK_CANCEL_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE, null, null, null);
+                    if (inputshowMessageDialog == JOptionPane.OK_OPTION) {
+                        book.createOne(
+                                nhapTenSach.getText(),
+                                nhapViTri.getText(),
+                                "Cho mượn được");
+                        danhMucSach();
+                    }
+                }
             }
         });
         buttonSuaSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                book.updateOne(
-                    nhapMaSach.getText(),
-                    nhapTenSach.getText(),
-                    nhapViTri.getText(),
-                    Status.getSelection().getActionCommand()
-                );
+                if (nhapMaSach.getText().equals("") || nhapTenSach.getText().equals("")
+                        || nhapViTri.getText().equals("") || Status.getSelection().getActionCommand().equals("")) {
+                    JOptionPane.showMessageDialog(buttonSuaSach, GlobalVariable.NOT_BLANK);
+                } else {
+                    int inputshowMessageDialog = JOptionPane.showOptionDialog(null,
+                            "Bạn có muốn sửa lại sách có mã sách " + nhapMaSach.getText() + " này?",
+                            "Thông báo", JOptionPane.OK_CANCEL_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE, null, null, null);
+                    if (inputshowMessageDialog == JOptionPane.OK_OPTION) {
+                        book.updateOne(
+                                nhapMaSach.getText(),
+                                nhapTenSach.getText(),
+                                nhapViTri.getText(),
+                                Status.getSelection().getActionCommand());
+                        danhMucSach();
+                    }
+                }
             }
         });
 
         JLabel khoaXoaSach = new JLabel();
-        JLabel maTheSachXoa = new JLabel();
-        JTextField nhapMaTheSachDeXoa = new JTextField();
+        JLabel maSachXoa = new JLabel();
+        JTextField nhapMaSachDeXoa = new JTextField();
         JButton buttonXoaSach = new JButton();
         GraphicFunctions.setLabel(khoaXoaSach, contentPane, "XÓA SÁCH", 460, 550, 150, 20);
-        GraphicFunctions.setLabel(maTheSachXoa, contentPane, "Mã sách", 370, 600, 120, 20);
-        GraphicFunctions.setTextField(nhapMaTheSachDeXoa, contentPane, 450, 600, 150, 20);
+        GraphicFunctions.setLabel(maSachXoa, contentPane, "Mã sách", 370, 600, 120, 20);
+        GraphicFunctions.setTextField(nhapMaSachDeXoa, contentPane, 450, 600, 150, 20);
         GraphicFunctions.setButton(buttonXoaSach, contentPane, "XÓA SÁCH", 420, 650, 150, 40);
 
         buttonXoaSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                book.deleteOne(nhapMaSach.getText());
+                if (nhapMaSachDeXoa.getText().equals("")) {
+                    JOptionPane.showMessageDialog(buttonXoaSach, GlobalVariable.NOT_BLANK);
+                } else {
+                    int inputshowMessageDialog = JOptionPane.showOptionDialog(null,
+                            "Bạn có muốn xóa sách có mã sách: " + nhapMaSachDeXoa.getText() + " ?",
+                            "Thông báo", JOptionPane.OK_CANCEL_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE, null, null, null);
+                    if (inputshowMessageDialog == JOptionPane.OK_OPTION) {
+                        book.deleteOne(nhapMaSach.getText());
+                        danhMucSach();
+                    }
+
+                }
             }
         });
 
@@ -395,7 +471,7 @@ public class Graphic {
                     daKhoa.setSelected(false);
                     daMat.setSelected(true);
                 }
-                nhapMaTheSachDeXoa.setText((String) tableDMS.getModel().getValueAt(rowDMS, 0));
+                nhapMaSachDeXoa.setText((String) tableDMS.getModel().getValueAt(rowDMS, 0));
             }
         });
         GraphicFunctions.setTable(tableDMS, contentPane, firstRow, data);
@@ -435,7 +511,11 @@ public class Graphic {
 
         buttonMuonSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(nhapMaDocGia.getText() + " " + nhapMaSach.getText());
+                if (nhapMaDocGia.getText().equals("") || nhapMaSach.getText().equals("")) {
+                    JOptionPane.showMessageDialog(buttonMuonSach, GlobalVariable.NOT_BLANK);
+                } else {
+                    System.out.println(nhapMaDocGia.getText() + " " + nhapMaSach.getText());
+                }
             }
         });
 

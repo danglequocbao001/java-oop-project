@@ -13,7 +13,7 @@ public class Main {
             program.loadModels(postgresql);
             program.mainMenu();
         } catch (Exception e) {
-        	System.out.println(e);
+            System.out.println(e);
         }
 
     }
