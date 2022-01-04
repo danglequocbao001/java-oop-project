@@ -10,9 +10,10 @@ public class Main {
 
         try {
             postgresql.connect();
-            program.connector = postgresql;
+            program.loadModels(postgresql);
             program.mainMenu();
         } catch (Exception e) {
+        	System.out.println(e);
         }
 
     }

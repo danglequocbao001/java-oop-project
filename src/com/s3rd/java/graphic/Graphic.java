@@ -4,25 +4,29 @@ import javax.swing.*;
 
 import com.s3rd.java.config.GlobalVariable;
 import com.s3rd.java.database.PostgreSql;
-// import com.s3rd.java.function.Function;
 import com.s3rd.java.models.Book;
 import com.s3rd.java.models.Reader;
 
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.Font;
 
 public class Graphic {
     private JFrame mainFrame;
     private JPanel contentPane;
-    public PostgreSql connector;
+    private PostgreSql connector;
 
     public Graphic() {
         prepareGUI();
+
+    }
+    
+    public void loadModels(PostgreSql connector) {
+        this.connector = connector;
     }
 
     public void prepareGUI() {
@@ -191,6 +195,7 @@ public class Graphic {
         Gender.add(khac);
         JButton buttonThemDocGia = new JButton();
         JButton buttonSuaDocGia = new JButton();
+        Reader reader = new Reader(this.connector);
         GraphicFunctions.setLabel(themDocGia, contentPane, "THÊM/SỬA ĐỘC GIẢ", 440, 170, 150, 20);
         GraphicFunctions.setLabel(maThe, contentPane, "Mã thẻ", 370, 230, 120, 20);
         GraphicFunctions.setLabel(ho, contentPane, "Họ", 370, 270, 120, 20);
@@ -209,17 +214,23 @@ public class Graphic {
         GraphicFunctions.setButton(buttonSuaDocGia, contentPane, "SỬA ĐỘC GIẢ", 520, 520, 150, 40);
         buttonThemDocGia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Function.themDocGia(buttonThemDocGia, nhapMaThe.getText(),
-                // nhapHo.getText(), nhapTen.getText(),
-                // "Nam");
-                System.out.println(nhapMaThe.getText() + " " + nhapHo.getText() + " " + nhapTen.getText() + " "
-                        + Gender.getSelection().getActionCommand() + " " + Status.getSelection().getActionCommand());
-
+                reader.createOne(
+                    nhapHo.getText(),
+                    nhapTen.getText(),
+                    Gender.getSelection().getActionCommand(),
+                    Status.getSelection().getActionCommand()
+                );
             }
         });
         buttonSuaDocGia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("buttonSuaDocGia");
+                reader.updateOne(
+                    nhapMaThe.getText(),
+                    nhapHo.getText(),
+                    nhapTen.getText(),
+                    Gender.getSelection().getActionCommand(),
+                    Status.getSelection().getActionCommand()
+                );
             }
         });
 
@@ -234,14 +245,13 @@ public class Graphic {
 
         buttonXoaDocGia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(nhapMaThe.getText());
+                reader.deleteOne(nhapMaThe.getText());
             }
         });
 
         JTable tableDocGia = new JTable();
         String firstRow[] = { "MÃ THẺ", "HỌ", "TÊN", "GIỚI TÍNH", "TRẠNG THÁI", "SỐ SÁCH ĐANG MƯỢN" };
-        Reader reader = new Reader(this.connector);
-        String[][] data = reader.getAll();
+        String[][] data = (String[][]) reader.getAll().data;
         tableDocGia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int rowDocGia = tableDocGia.rowAtPoint(evt.getPoint());
@@ -311,6 +321,7 @@ public class Graphic {
         Status.add(daMat);
         JButton buttonThemSach = new JButton();
         JButton buttonSuaSach = new JButton();
+        Book book = new Book(this.connector);
         GraphicFunctions.setLabel(themSach, contentPane, "THÊM/SỬA SÁCH", 440, 170, 150, 20);
         GraphicFunctions.setLabel(maSach, contentPane, "Mã sách", 370, 230, 120, 20);
         GraphicFunctions.setLabel(tenSach, contentPane, "Tên sách", 370, 270, 120, 20);
@@ -327,14 +338,21 @@ public class Graphic {
 
         buttonThemSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(nhapMaSach.getText() + " " + nhapTenSach.getText() + " " + nhapViTri.getText() + " "
-                        + Status.getSelection().getActionCommand());
+                book.createOne(
+                    nhapTenSach.getText(),
+                    nhapViTri.getText(),
+                    Status.getSelection().getActionCommand()
+                );
             }
         });
         buttonSuaSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(nhapMaSach.getText() + " " + nhapTenSach.getText() + " " + nhapViTri.getText() + " "
-                        + Status.getSelection().getActionCommand());
+                book.updateOne(
+                    nhapMaSach.getText(),
+                    nhapTenSach.getText(),
+                    nhapViTri.getText(),
+                    Status.getSelection().getActionCommand()
+                );
             }
         });
 
@@ -349,14 +367,13 @@ public class Graphic {
 
         buttonXoaSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(nhapMaSach.getText());
+                book.deleteOne(nhapMaSach.getText());
             }
         });
 
         JTable tableDMS = new JTable();
-        Book book = new Book(this.connector);
         String firstRow[] = { "MÃ SÁCH", "TÊN SÁCH", "VỊ TRÍ", "TRẠNG THÁI" };
-        String[][] data = book.getAll();
+        String[][] data = (String[][]) book.getAll().data;
         tableDMS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int rowDMS = tableDMS.rowAtPoint(evt.getPoint());
