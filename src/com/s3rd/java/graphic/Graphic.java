@@ -535,7 +535,7 @@ public class Graphic {
 
         JTable tableDocGia = new JTable();
         JTable tableMuonTra = new JTable();
-        String firstRowDocGia[] = { "MÃ ĐỘC GIẢ", "HỌ", "TÊN", "SỐ SÁCH ĐÃ MƯỢN" };
+        String firstRowDocGia[] = { "MÃ ĐỘC GIẢ", "HỌ", "TÊN", "SỐ SÁCH ĐANG MƯỢN" };
         String firstRow[] = { "MÃ SÁCH", "TÊN SÁCH", "VỊ TRÍ", "NGƯỜI MƯỢN" };
         String dataDocGia[][] = {
                 { "1", "Dang", "Bao", "2" },
