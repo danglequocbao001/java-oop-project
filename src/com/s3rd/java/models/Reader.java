@@ -7,6 +7,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+// TODO: Add function query these columns
+// SELECT readers.id, readers.first_name, readers.last_name, readers.gender, readers.status, COUNT(borrow_statuses.reader_id) AS borrowed
+// FROM readers
+// LEFT JOIN borrow_statuses 
+// 	ON readers.id = borrow_statuses.reader_id
+// GROUP BY borrow_statuses.reader_id, readers.id
+// ORDER BY readers.id;
+
 public class Reader {
     PostgreSql connector;
     String GET_ALL = "SELECT * FROM readers ORDER BY id";
@@ -51,7 +59,7 @@ public class Reader {
             this.connector.statement.close();
 
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("{Reader#getAll}" + e);
         }
 
         String[][] results = new String[records.size()][];
@@ -75,11 +83,11 @@ public class Reader {
                 if (generatedKeys.next())
                 id = String.valueOf(generatedKeys.getLong(1));
             } catch (Exception exception1) {
-                System.out.println(exception1);
+                System.out.println("{Reader#createOne}" + exception1);
             }
 
         } catch (Exception exception2) {
-        	System.out.println(exception2);
+                System.out.println("{Reader#createOne}" + exception2);
         }
         return new Response(id);
     }
@@ -95,7 +103,7 @@ public class Reader {
             statement.executeUpdate();
 
         } catch (Exception exception2) {
-        	System.out.println(exception2);
+                System.out.println("{Reader#updateOne}" + exception2);
         }
 
         return new Response(id);
@@ -108,7 +116,7 @@ public class Reader {
             statement.executeUpdate();
 
         } catch (Exception exception2) {
-        	System.out.println(exception2);
+                System.out.println("{Reader#deleteOne}" + exception2);
         }
 
         return new Response(id);
@@ -120,7 +128,9 @@ public class Reader {
 
         try {
             postgresql.connect();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            System.out.println("{Reader#main}" + e);
+        }
 
         // list all
         String[][] result = (String[][]) reader.getAll().data;

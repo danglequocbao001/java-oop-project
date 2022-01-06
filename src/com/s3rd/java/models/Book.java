@@ -32,7 +32,7 @@ public class Book {
 
         try {
             this.connector.statement = this.connector.connection.createStatement();
-            ResultSet rs = this.connector.statement.executeQuery("select * from books");
+            ResultSet rs = this.connector.statement.executeQuery(GET_ALL);
 
             Integer index = 0;
             while (rs.next()) {
@@ -48,7 +48,7 @@ public class Book {
             this.connector.statement.close();
 
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("{Book#getAll}" + e);
         }
 
         String[][] results = new String[records.size()][];
@@ -71,11 +71,11 @@ public class Book {
                 if (generatedKeys.next())
                 id = String.valueOf(generatedKeys.getLong(1));
             } catch (Exception exception1) {
-                System.out.println(exception1);
+                System.out.println("{Book#createOne}" + exception1);
             }
 
         } catch (Exception exception2) {
-        	System.out.println(exception2);
+                System.out.println("{Book#createOne}" + exception2);
         }
         return new Response(id);
     }
@@ -90,7 +90,7 @@ public class Book {
             statement.executeUpdate();
 
         } catch (Exception exception2) {
-        	System.out.println(exception2);
+                System.out.println("{Book#updateOne}" + exception2);
         }
 
         return new Response(id);
@@ -103,7 +103,7 @@ public class Book {
             statement.executeUpdate();
 
         } catch (Exception exception2) {
-        	System.out.println(exception2);
+                System.out.println("{Book#deleteOne}" + exception2);
         }
 
         return new Response(id);
@@ -115,7 +115,9 @@ public class Book {
 
         try {
             postgresql.connect();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            System.out.println("{Book#main}" + e);
+        }
 
 
         // list all

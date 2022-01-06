@@ -9,7 +9,7 @@ public class TestConnection {
 			voi.connect();
 			System.out.println("connect");
 		} catch (SQLException e) {
-			System.out.println("can not connect to database");
+			System.out.println("{TestConnection#main} can not connect to database");
 		}
 	}
 }

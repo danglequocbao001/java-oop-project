@@ -4,8 +4,7 @@ import javax.swing.*;
 
 import com.s3rd.java.config.GlobalVariable;
 import com.s3rd.java.database.PostgreSql;
-import com.s3rd.java.models.Book;
-import com.s3rd.java.models.Reader;
+import com.s3rd.java.models.*;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -14,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.time.LocalDate;
 
 public class Graphic {
     private JFrame mainFrame;
@@ -500,6 +500,7 @@ public class Graphic {
         JButton buttonMuonSach = new JButton();
         JButton buttonTraSach = new JButton();
         JButton buttonMatSach = new JButton();
+        BorrowStatus borrow_statuses = new BorrowStatus(this.connector);
         GraphicFunctions.setLabel(muonSach, contentPane, "MƯỢN SÁCH", 140, 170, 150, 20);
         GraphicFunctions.setLabel(traMatSach, contentPane, "TRẢ/MẤT SÁCH", 130, 450, 150, 20);
         GraphicFunctions.setLabel(maDocGia, contentPane, "Mã độc giả", 70, 240, 120, 20);
@@ -517,15 +518,16 @@ public class Graphic {
                 if (nhapMaDocGia.getText().equals("") || nhapMaSach.getText().equals("")) {
                     JOptionPane.showMessageDialog(buttonMuonSach, GlobalVariable.NOT_BLANK);
                 } else {
-                    System.out.println(nhapMaDocGia.getText() + " " + nhapMaSach.getText());
+                    // System.out.println(nhapMaDocGia.getText() + " " + nhapMaSach.getText());
+                    borrow_statuses.createOne(nhapMaSach.getText(), nhapMaDocGia.getText(), LocalDate.now(), null);
                 }
             }
         });
 
         buttonTraSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(nhapMaMuonTra.getText());
-
+                System.out.println(nhapMaDocGia.getText() + " " + nhapMaSach.getText());
+                borrow_statuses.createOne(nhapMaSach.getText(), nhapMaDocGia.getText(), LocalDate.now(), null);
             }
         });
 
