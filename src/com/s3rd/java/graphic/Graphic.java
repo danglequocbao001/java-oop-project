@@ -31,13 +31,13 @@ public class Graphic {
 
     public void prepareGUI() {
         mainFrame = new JFrame("Đồ án kết môn OOP với JAVA");
-        mainFrame.pack();
-        mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        // mainFrame.pack();
+        // mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        // mainFrame.setLocationRelativeTo(null);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = screenSize.height;
         int width = screenSize.width;
         mainFrame.setSize(width, height);
-        mainFrame.setLocationRelativeTo(null);
         mainFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
                 System.exit(0);
@@ -46,8 +46,8 @@ public class Graphic {
         contentPane = new JPanel();
         contentPane.setLayout(null);
         mainFrame.add(contentPane);
-        mainFrame.setVisible(true);
-        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        mainFrame.setVisible(true); // hide when enter next frame
+        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH); // full screen size mode
     }
 
     public void run() {
@@ -472,6 +472,7 @@ public class Graphic {
                     daMat.setSelected(true);
                 }
                 nhapMaSachDeXoa.setText((String) tableDMS.getModel().getValueAt(rowDMS, 0));
+                tableDMS.getSelectionModel().clearSelection();
             }
         });
         GraphicFunctions.setTable(tableDMS, contentPane, firstRow, data);
@@ -550,12 +551,14 @@ public class Graphic {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int rowDocGia = tableDocGia.rowAtPoint(evt.getPoint());
                 nhapMaDocGia.setText((String) tableDocGia.getModel().getValueAt(rowDocGia, 0));
+                tableDocGia.getSelectionModel().clearSelection();
             }
         });
         tableMuonTra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int rowMuonTra = tableMuonTra.rowAtPoint(evt.getPoint());
                 nhapMaSach.setText((String) tableMuonTra.getModel().getValueAt(rowMuonTra, 0));
+                tableMuonTra.getSelectionModel().clearSelection();
             }
         });
         GraphicFunctions.setTable(tableDocGia, contentPane, firstRowDocGia, dataDocGia);
