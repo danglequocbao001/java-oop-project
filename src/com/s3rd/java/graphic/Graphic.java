@@ -535,18 +535,25 @@ public class Graphic {
         });
 
         JTable tableDocGia = new JTable();
+        JTable tableSach = new JTable();
         JTable tableMuonTra = new JTable();
+
         String firstRowDocGia[] = { "MÃ ĐỘC GIẢ", "HỌ", "TÊN", "SỐ SÁCH ĐANG MƯỢN" };
-        String firstRow[] = { "MÃ SÁCH", "TÊN SÁCH", "VỊ TRÍ", "NGƯỜI MƯỢN" };
+        String firstRowSach[] = { "MÃ SÁCH", "TÊN SÁCH", "VỊ TRÍ", "NGƯỜI MƯỢN" };
+        String firstRowMuonTra[] = { "MÃ MƯỢN TRẢ", "TÊN SÁCH", "NGƯỜI MƯỢN", "THỜI ĐIỂM MƯỢN", "THỜI ĐIỂM TRẢ" };
+
         String dataDocGia[][] = {
                 { "1", "Dang", "Bao", "2" },
                 { "2", "Dangg", "Bao0", "1" },
                 { "3", "Nguyen", "Danh", "0" },
                 { "4", "Nguyen", "Thi", "0" },
-                { "5", "Nguyen", "Thanh", "0" } };
-        String data[][] = {
+        };
+        String dataSach[][] = {
                 { "1", "OOP with JAVA", "Kệ 1 ngăn 1", "Dang Bao" },
                 { "2", "Python program language", "Kệ 1 ngăn 2", "Dang Baoo" } };
+        String dataMuonTra[][] = {
+                { "1", "OOP with JAVA", "Dang Bao", "01/01/22", "05/01/22" },
+                { "2", "Python program language", "Nguyễn Danh", "02/02/22", "" } };
         tableDocGia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int rowDocGia = tableDocGia.rowAtPoint(evt.getPoint());
@@ -554,21 +561,35 @@ public class Graphic {
                 tableDocGia.getSelectionModel().clearSelection();
             }
         });
+        tableSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int rowSach = tableSach.rowAtPoint(evt.getPoint());
+                nhapMaSach.setText((String) tableSach.getModel().getValueAt(rowSach, 0));
+                tableSach.getSelectionModel().clearSelection();
+            }
+        });
+
         tableMuonTra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                int rowMuonTra = tableMuonTra.rowAtPoint(evt.getPoint());
-                nhapMaSach.setText((String) tableMuonTra.getModel().getValueAt(rowMuonTra, 0));
                 tableMuonTra.getSelectionModel().clearSelection();
             }
         });
+
         GraphicFunctions.setTable(tableDocGia, contentPane, firstRowDocGia, dataDocGia);
-        GraphicFunctions.setTable(tableMuonTra, contentPane, firstRow, data);
+        GraphicFunctions.setTable(tableSach, contentPane, firstRowSach, dataSach);
+        GraphicFunctions.setTable(tableMuonTra, contentPane, firstRowMuonTra, dataMuonTra);
+
         JScrollPane scrollPaneDocGia = new JScrollPane(tableDocGia);
-        JScrollPane scrollPane = new JScrollPane(tableMuonTra);
-        scrollPaneDocGia.setBounds(400, 100, 700, 800);
-        scrollPane.setBounds(1150, 100, 700, 800);
-        contentPane.add(scrollPane);
+        JScrollPane scrollPaneSach = new JScrollPane(tableSach);
+        JScrollPane scrollPaneMuonTra = new JScrollPane(tableMuonTra);
+
+        scrollPaneDocGia.setBounds(390, 10, 750, 490);
+        scrollPaneSach.setBounds(390, 515, 750, 490);
+        scrollPaneMuonTra.setBounds(1155, 10, 750, 995);
+
         contentPane.add(scrollPaneDocGia);
+        contentPane.add(scrollPaneSach);
+        contentPane.add(scrollPaneMuonTra);
 
         JButton goBack = new JButton();
         GraphicFunctions.setButton(goBack, contentPane, GlobalVariable.GO_BACK, 100, 840, 230, 60);
