@@ -22,7 +22,6 @@ public class Graphic {
 
     public Graphic() {
         prepareGUI();
-
     }
 
     public void loadModels(PostgreSql connector) {
@@ -173,7 +172,7 @@ public class Graphic {
         mainFrame.setVisible(false);
         prepareGUI();
         JLabel themDocGia = new JLabel();
-        JLabel maThe = new JLabel();
+        JLabel maDocGia = new JLabel();
         JLabel ho = new JLabel();
         JLabel ten = new JLabel();
         JLabel gioiTinh = new JLabel();
@@ -197,14 +196,14 @@ public class Graphic {
         JButton buttonSuaDocGia = new JButton();
         Reader reader = new Reader(this.connector);
         GraphicFunctions.setLabel(themDocGia, contentPane, "THÊM/SỬA ĐỘC GIẢ", 440, 170, 150, 20);
-        GraphicFunctions.setLabel(maThe, contentPane, "Mã thẻ", 370, 230, 120, 20);
+        GraphicFunctions.setLabel(maDocGia, contentPane, "Mã độc giả", 370, 230, 120, 20);
         GraphicFunctions.setLabel(ho, contentPane, "Họ", 370, 270, 120, 20);
         GraphicFunctions.setLabel(ten, contentPane, "Tên", 370, 310, 120, 20);
         GraphicFunctions.setLabel(gioiTinh, contentPane, "Giới tính", 370, 350, 120, 20);
         GraphicFunctions.setLabel(trangThai, contentPane, "Trạng thái", 370, 450, 120, 20);
-        GraphicFunctions.setLabel(nhapMaThe, contentPane, "Chọn vào bảng để hiển thị!", 450, 230, 200, 20);
-        GraphicFunctions.setTextField(nhapHo, contentPane, 450, 270, 150, 20);
-        GraphicFunctions.setTextField(nhapTen, contentPane, 450, 310, 150, 20);
+        GraphicFunctions.setLabel(nhapMaThe, contentPane, "Chọn vào bảng để hiển thị!", 465, 230, 200, 20);
+        GraphicFunctions.setTextField(nhapHo, contentPane, 465, 270, 150, 20);
+        GraphicFunctions.setTextField(nhapTen, contentPane, 465, 310, 150, 20);
         GraphicFunctions.setRadioButton(nam, contentPane, "Nam", 460, 350, 170, 30);
         GraphicFunctions.setRadioButton(nu, contentPane, "Nữ", 460, 380, 170, 30);
         GraphicFunctions.setRadioButton(khac, contentPane, "Khác", 460, 410, 170, 30);
@@ -244,7 +243,7 @@ public class Graphic {
                     JOptionPane.showMessageDialog(buttonSuaDocGia, GlobalVariable.NOT_BLANK);
                 } else {
                     int inputshowMessageDialog = JOptionPane.showOptionDialog(null,
-                            "Bạn có muốn sửa lại độc giả có mã thẻ " + nhapMaThe.getText() + " này?",
+                            "Bạn có muốn sửa lại độc giả có mã độc giả " + nhapMaThe.getText() + " này?",
                             "Thông báo", JOptionPane.OK_CANCEL_OPTION,
                             JOptionPane.INFORMATION_MESSAGE, null, null, null);
 
@@ -262,12 +261,12 @@ public class Graphic {
         });
 
         JLabel khoaXoaDocGia = new JLabel();
-        JLabel maTheXoa = new JLabel();
+        JLabel maDocGiaXoa = new JLabel();
         JTextField nhapMaTheDeXoa = new JTextField();
         JButton buttonXoaDocGia = new JButton();
         GraphicFunctions.setLabel(khoaXoaDocGia, contentPane, "XÓA ĐỘC GIẢ", 440, 600, 150, 20);
-        GraphicFunctions.setLabel(maTheXoa, contentPane, "Mã thẻ", 370, 660, 120, 20);
-        GraphicFunctions.setTextField(nhapMaTheDeXoa, contentPane, 450, 660, 150, 20);
+        GraphicFunctions.setLabel(maDocGiaXoa, contentPane, "Mã độc giả", 370, 660, 120, 20);
+        GraphicFunctions.setTextField(nhapMaTheDeXoa, contentPane, 465, 660, 150, 20);
         GraphicFunctions.setButton(buttonXoaDocGia, contentPane, "XÓA ĐỘC GIẢ", 440, 710, 150, 40);
 
         buttonXoaDocGia.addActionListener(new ActionListener() {
@@ -276,7 +275,7 @@ public class Graphic {
                     JOptionPane.showMessageDialog(buttonXoaDocGia, GlobalVariable.NOT_BLANK);
                 } else {
                     int inputshowMessageDialog = JOptionPane.showOptionDialog(null,
-                            "Bạn có muốn xóa độc giả có mã thẻ " + nhapMaTheDeXoa.getText() + " ?",
+                            "Bạn có muốn xóa độc giả có mã " + nhapMaTheDeXoa.getText() + " ?",
                             "Thông báo", JOptionPane.OK_CANCEL_OPTION,
                             JOptionPane.INFORMATION_MESSAGE, null, null, null);
 
@@ -289,7 +288,7 @@ public class Graphic {
         });
 
         JTable tableDocGia = new JTable();
-        String firstRow[] = { "MÃ THẺ", "HỌ", "TÊN", "GIỚI TÍNH", "TRẠNG THÁI", "SỐ SÁCH ĐANG MƯỢN" };
+        String firstRow[] = { "MÃ ĐỘC GIẢ", "HỌ", "TÊN", "GIỚI TÍNH", "TRẠNG THÁI", "SỐ SÁCH ĐANG MƯỢN" };
         String[][] data = (String[][]) reader.getAll().data;
         tableDocGia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -367,9 +366,9 @@ public class Graphic {
         GraphicFunctions.setLabel(tenSach, contentPane, "Tên sách", 370, 270, 120, 20);
         GraphicFunctions.setLabel(viTri, contentPane, "Vị trí", 370, 310, 120, 20);
         GraphicFunctions.setLabel(trangThai, contentPane, "Trạng thái", 370, 350, 120, 20);
-        GraphicFunctions.setLabel(nhapMaSach, contentPane, "Chọn vào bảng để hiển thị!", 450, 230, 200, 20);
-        GraphicFunctions.setTextField(nhapTenSach, contentPane, 450, 270, 150, 20);
-        GraphicFunctions.setTextField(nhapViTri, contentPane, 450, 310, 150, 20);
+        GraphicFunctions.setLabel(nhapMaSach, contentPane, "Chọn vào bảng để hiển thị!", 465, 230, 200, 20);
+        GraphicFunctions.setTextField(nhapTenSach, contentPane, 465, 270, 150, 20);
+        GraphicFunctions.setTextField(nhapViTri, contentPane, 465, 310, 150, 20);
         GraphicFunctions.setRadioButton(choMuonDuoc, contentPane, "Cho mượn được", 460, 350, 170, 30);
         GraphicFunctions.setRadioButton(daKhoa, contentPane, "Đã khóa", 460, 380, 170, 30);
         GraphicFunctions.setRadioButton(daMat, contentPane, "Đã mất", 460, 410, 170, 30);
@@ -426,7 +425,7 @@ public class Graphic {
         JButton buttonXoaSach = new JButton();
         GraphicFunctions.setLabel(khoaXoaSach, contentPane, "XÓA SÁCH", 460, 550, 150, 20);
         GraphicFunctions.setLabel(maSachXoa, contentPane, "Mã sách", 370, 600, 120, 20);
-        GraphicFunctions.setTextField(nhapMaSachDeXoa, contentPane, 450, 600, 150, 20);
+        GraphicFunctions.setTextField(nhapMaSachDeXoa, contentPane, 465, 600, 150, 20);
         GraphicFunctions.setButton(buttonXoaSach, contentPane, "XÓA SÁCH", 420, 650, 150, 40);
 
         buttonXoaSach.addActionListener(new ActionListener() {
@@ -508,10 +507,10 @@ public class Graphic {
         GraphicFunctions.setLabel(traMatSach, contentPane, "TRẢ/MẤT SÁCH", 130, 450, 150, 20);
         GraphicFunctions.setLabel(maDocGia, contentPane, "Mã độc giả", 70, 240, 120, 20);
         GraphicFunctions.setLabel(maSach, contentPane, "Mã sách", 70, 280, 120, 20);
-        GraphicFunctions.setLabel(maMuonTra, contentPane, "Mã mượn trả", 70, 520, 120, 20);
-        GraphicFunctions.setTextField(nhapMaSach, contentPane, 170, 280, 150, 20);
+        GraphicFunctions.setLabel(maMuonTra, contentPane, "Mã mượn trả", 60, 520, 120, 20);
         GraphicFunctions.setTextField(nhapMaDocGia, contentPane, 170, 240, 150, 20);
-        GraphicFunctions.setTextField(nhapMaMuonTra, contentPane, 170, 520, 150, 20);
+        GraphicFunctions.setTextField(nhapMaSach, contentPane, 170, 280, 150, 20);
+        GraphicFunctions.setTextField(nhapMaMuonTra, contentPane, 180, 520, 150, 20);
         GraphicFunctions.setButton(buttonMuonSach, contentPane, "MƯỢN SÁCH", 120, 330, 150, 40);
         GraphicFunctions.setButton(buttonTraSach, contentPane, "TRẢ SÁCH", 50, 570, 150, 40);
         GraphicFunctions.setButton(buttonMatSach, contentPane, "LÀM MẤT SÁCH", 220, 570, 150, 40);
