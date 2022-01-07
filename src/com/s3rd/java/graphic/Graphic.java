@@ -493,22 +493,28 @@ public class Graphic {
         mainFrame.setVisible(false);
         prepareGUI();
 
-        JLabel muonTraSach = new JLabel();
+        JLabel muonSach = new JLabel();
+        JLabel traMatSach = new JLabel();
         JLabel maDocGia = new JLabel();
         JLabel maSach = new JLabel();
+        JLabel maMuonTra = new JLabel();
         JTextField nhapMaDocGia = new JTextField();
         JTextField nhapMaSach = new JTextField();
+        JTextField nhapMaMuonTra = new JTextField();
         JButton buttonMuonSach = new JButton();
         JButton buttonTraSach = new JButton();
         JButton buttonMatSach = new JButton();
-        GraphicFunctions.setLabel(muonTraSach, contentPane, "MƯỢN TRẢ SÁCH", 140, 170, 150, 20);
+        GraphicFunctions.setLabel(muonSach, contentPane, "MƯỢN SÁCH", 140, 170, 150, 20);
+        GraphicFunctions.setLabel(traMatSach, contentPane, "TRẢ/MẤT SÁCH", 130, 450, 150, 20);
         GraphicFunctions.setLabel(maDocGia, contentPane, "Mã độc giả", 70, 240, 120, 20);
         GraphicFunctions.setLabel(maSach, contentPane, "Mã sách", 70, 280, 120, 20);
+        GraphicFunctions.setLabel(maMuonTra, contentPane, "Mã mượn trả", 70, 520, 120, 20);
         GraphicFunctions.setTextField(nhapMaSach, contentPane, 170, 280, 150, 20);
         GraphicFunctions.setTextField(nhapMaDocGia, contentPane, 170, 240, 150, 20);
-        GraphicFunctions.setButton(buttonMuonSach, contentPane, "MƯỢN SÁCH", 50, 360, 150, 40);
-        GraphicFunctions.setButton(buttonTraSach, contentPane, "TRẢ SÁCH", 220, 360, 150, 40);
-        GraphicFunctions.setButton(buttonMatSach, contentPane, "LÀM MẤT SÁCH", 140, 430, 150, 40);
+        GraphicFunctions.setTextField(nhapMaMuonTra, contentPane, 170, 520, 150, 20);
+        GraphicFunctions.setButton(buttonMuonSach, contentPane, "MƯỢN SÁCH", 120, 330, 150, 40);
+        GraphicFunctions.setButton(buttonTraSach, contentPane, "TRẢ SÁCH", 50, 570, 150, 40);
+        GraphicFunctions.setButton(buttonMatSach, contentPane, "LÀM MẤT SÁCH", 220, 570, 150, 40);
 
         buttonMuonSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -522,14 +528,14 @@ public class Graphic {
 
         buttonTraSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(nhapMaDocGia.getText() + " " + nhapMaSach.getText());
+                System.out.println(nhapMaMuonTra.getText());
 
             }
         });
 
         buttonMatSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(nhapMaDocGia.getText() + " " + nhapMaSach.getText());
+                System.out.println(nhapMaMuonTra.getText());
 
             }
         });
@@ -539,7 +545,7 @@ public class Graphic {
         JTable tableMuonTra = new JTable();
 
         String firstRowDocGia[] = { "MÃ ĐỘC GIẢ", "HỌ", "TÊN", "SỐ SÁCH ĐANG MƯỢN" };
-        String firstRowSach[] = { "MÃ SÁCH", "TÊN SÁCH", "VỊ TRÍ", "NGƯỜI MƯỢN" };
+        String firstRowSach[] = { "MÃ SÁCH", "TÊN SÁCH", "VỊ TRÍ" };
         String firstRowMuonTra[] = { "MÃ MƯỢN TRẢ", "TÊN SÁCH", "NGƯỜI MƯỢN", "THỜI ĐIỂM MƯỢN", "THỜI ĐIỂM TRẢ" };
 
         String dataDocGia[][] = {
@@ -549,11 +555,11 @@ public class Graphic {
                 { "4", "Nguyen", "Thi", "0" },
         };
         String dataSach[][] = {
-                { "1", "OOP with JAVA", "Kệ 1 ngăn 1", "Dang Bao" },
-                { "2", "Python program language", "Kệ 1 ngăn 2", "Dang Baoo" } };
+                { "1", "OOP with JAVA", "Kệ 1 ngăn 1" },
+                { "2", "Python program language", "Kệ 1 ngăn 2" } };
         String dataMuonTra[][] = {
-                { "1", "OOP with JAVA", "Dang Bao", "01/01/22", "05/01/22" },
-                { "2", "Python program language", "Nguyễn Danh", "02/02/22", "" } };
+                { "11", "OOP with JAVA", "Dang Bao", "01/01/22", "05/01/22" },
+                { "12", "Python program language", "Nguyễn Danh", "02/02/22", "" } };
         tableDocGia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int rowDocGia = tableDocGia.rowAtPoint(evt.getPoint());
@@ -571,6 +577,8 @@ public class Graphic {
 
         tableMuonTra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int rowMuonTra = tableMuonTra.rowAtPoint(evt.getPoint());
+                nhapMaMuonTra.setText((String) tableMuonTra.getModel().getValueAt(rowMuonTra, 0));
                 tableMuonTra.getSelectionModel().clearSelection();
             }
         });
@@ -584,8 +592,8 @@ public class Graphic {
         JScrollPane scrollPaneMuonTra = new JScrollPane(tableMuonTra);
 
         scrollPaneDocGia.setBounds(390, 10, 750, 490);
-        scrollPaneSach.setBounds(390, 515, 750, 490);
-        scrollPaneMuonTra.setBounds(1155, 10, 750, 995);
+        scrollPaneSach.setBounds(1155, 10, 750, 490);
+        scrollPaneMuonTra.setBounds(390, 515, 1515, 490);
 
         contentPane.add(scrollPaneDocGia);
         contentPane.add(scrollPaneSach);
