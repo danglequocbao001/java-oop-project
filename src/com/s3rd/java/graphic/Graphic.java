@@ -53,8 +53,9 @@ public class Graphic {
         mainFrame.setVisible(false);
         prepareGUI();
         JButton buttonLRun = new JButton();
-        GraphicFunctions.setButton(buttonLRun, contentPane, "CHẠY CHƯƠNG TRÌNH", 830, 400, 300, 150);
-
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        GraphicFunctions.setButton(buttonLRun, contentPane, "CHẠY CHƯƠNG TRÌNH", 0, 0, screenSize.width,
+                screenSize.height);
         buttonLRun.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 login();
