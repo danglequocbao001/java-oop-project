@@ -372,7 +372,6 @@ public class Graphic {
         GraphicFunctions.setTextField(nhapViTri, contentPane, 465, 310, 150, 20);
         GraphicFunctions.setRadioButton(choMuonDuoc, contentPane, "Cho mượn được", 460, 350, 170, 30);
         GraphicFunctions.setRadioButton(daKhoa, contentPane, "Đã khóa", 460, 380, 170, 30);
-        GraphicFunctions.setRadioButton(daMat, contentPane, "Đã mất", 460, 410, 170, 30);
         GraphicFunctions.setButton(buttonThemSach, contentPane, "THÊM SÁCH", 350, 460, 150, 40);
         GraphicFunctions.setButton(buttonSuaSach, contentPane, "SỬA SÁCH", 520, 460, 150, 40);
 
