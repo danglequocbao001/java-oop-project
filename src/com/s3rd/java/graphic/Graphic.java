@@ -30,9 +30,6 @@ public class Graphic {
 
     public void prepareGUI() {
         mainFrame = new JFrame("Đồ án kết môn OOP với JAVA");
-        // mainFrame.pack();
-        // mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        // mainFrame.setLocationRelativeTo(null);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = screenSize.height;
         int width = screenSize.width;
