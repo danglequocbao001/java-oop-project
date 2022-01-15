@@ -245,6 +245,11 @@ public class Graphic {
                             "Thông báo", JOptionPane.OK_CANCEL_OPTION,
                             JOptionPane.INFORMATION_MESSAGE, null, null, null);
 
+                    // int inputshowMessageDialog = JOptionPane.showOptionDialog(null,
+                    // "Không thể khóa hoặc xóa độc giả đang mượn sách!",
+                    // "Thông báo", JOptionPane.OK_CANCEL_OPTION,
+                    // JOptionPane.INFORMATION_MESSAGE, null, null, null);
+
                     if (inputshowMessageDialog == JOptionPane.OK_OPTION) {
                         reader.updateOne(
                                 nhapMaThe.getText(),
@@ -500,6 +505,8 @@ public class Graphic {
         JButton buttonMuonSach = new JButton();
         JButton buttonTraSach = new JButton();
         JButton buttonMatSach = new JButton();
+        JTextField nhapGhiChu = new JTextField();
+        ;
         Book book = new Book(this.connector);
         Reader reader = new Reader(this.connector);
         BorrowStatus borrowStatuses = new BorrowStatus(this.connector);
@@ -520,22 +527,55 @@ public class Graphic {
                 if (nhapMaDocGia.getText().equals("") || nhapMaSach.getText().equals("")) {
                     JOptionPane.showMessageDialog(buttonMuonSach, GlobalVariable.NOT_BLANK);
                 } else {
-                    // System.out.println(nhapMaDocGia.getText() + " " + nhapMaSach.getText());
                     borrowStatuses.createOne(nhapMaSach.getText(), nhapMaDocGia.getText(), LocalDateTime.now(), null);
+                    muonTraSach();
                 }
             }
         });
 
         buttonTraSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                borrowStatuses.updateTimeOne(nhapMaMuonTra.getText());
+                if (nhapMaMuonTra.getText().equals("")) {
+                    JOptionPane.showMessageDialog(buttonTraSach, GlobalVariable.NOT_BLANK);
+                } else {
+                    if (nhapGhiChu.getText().length() != 0) {
+                        JOptionPane.showMessageDialog(buttonTraSach, GlobalVariable.NOT_BORROW);
+                    } else {
+                        int inputshowMessageDialog = JOptionPane.showOptionDialog(null,
+                                "Thực hiện trả sách cho mã mượn trả " + nhapMaMuonTra.getText() + " ?",
+                                "Thông báo", JOptionPane.OK_CANCEL_OPTION,
+                                JOptionPane.INFORMATION_MESSAGE, null, null, null);
+                        if (inputshowMessageDialog == JOptionPane.OK_OPTION) {
+                            borrowStatuses.updateTimeOne(nhapMaMuonTra.getText());
+                            muonTraSach();
+                        }
+                    }
+                }
             }
         });
 
         buttonMatSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                borrowStatuses.lostBook(nhapMaMuonTra.getText());
-                book.updateStatusBook(nhapMaMuonTra.getText(), Book.LOST);
+
+                if (nhapMaMuonTra.getText().equals("")) {
+                    JOptionPane.showMessageDialog(buttonTraSach, GlobalVariable.NOT_BLANK);
+                } else {
+                    if (nhapGhiChu.getText().length() != 0) {
+                        JOptionPane.showMessageDialog(buttonTraSach, GlobalVariable.NOT_BORROW);
+                    } else {
+
+                        int inputshowMessageDialog = JOptionPane.showOptionDialog(null,
+                                "Thực hiện mất sách cho mã mượn trả " + nhapMaMuonTra.getText() + " ?",
+                                "Thông báo", JOptionPane.OK_CANCEL_OPTION,
+                                JOptionPane.INFORMATION_MESSAGE, null, null, null);
+                        if (inputshowMessageDialog == JOptionPane.OK_OPTION) {
+                            borrowStatuses.lostBook(nhapMaMuonTra.getText());
+                            book.updateStatusBook(nhapMaMuonTra.getText(), Book.LOST);
+                            muonTraSach();
+                        }
+
+                    }
+                }
             }
         });
 
@@ -544,8 +584,9 @@ public class Graphic {
         JTable tableMuonTra = new JTable();
 
         String firstRowDocGia[] = { "MÃ ĐỘC GIẢ", "HỌ", "TÊN", "GIỚI TÍNH", "TRẠNG THÁI", "SỐ SÁCH ĐANG MƯỢN" };
-        String firstRowSach[] = { "MÃ SÁCH", "TÊN SÁCH", "VỊ TRÍ"};
-        String firstRowMuonTra[] = { "MÃ MƯỢN TRẢ", "TÊN SÁCH", "NGƯỜI MƯỢN", "THỜI ĐIỂM MƯỢN", "THỜI ĐIỂM TRẢ", "GHI CHÚ" };
+        String firstRowSach[] = { "MÃ SÁCH", "TÊN SÁCH", "VỊ TRÍ" };
+        String firstRowMuonTra[] = { "MÃ MƯỢN TRẢ", "TÊN SÁCH", "NGƯỜI MƯỢN", "THỜI ĐIỂM MƯỢN", "THỜI ĐIỂM TRẢ",
+                "GHI CHÚ" };
 
         String dataDocGia[][] = (String[][]) reader.getAll(true).data;
         String dataSach[][] = (String[][]) book.getAll(true).data;
@@ -570,6 +611,7 @@ public class Graphic {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int rowMuonTra = tableMuonTra.rowAtPoint(evt.getPoint());
                 nhapMaMuonTra.setText((String) tableMuonTra.getModel().getValueAt(rowMuonTra, 0));
+                nhapGhiChu.setText((String) tableMuonTra.getModel().getValueAt(rowMuonTra, 5));
                 tableMuonTra.getSelectionModel().clearSelection();
             }
         });
@@ -582,8 +624,8 @@ public class Graphic {
         JScrollPane scrollPaneSach = new JScrollPane(tableSach);
         JScrollPane scrollPaneMuonTra = new JScrollPane(tableMuonTra);
 
-        scrollPaneDocGia.setBounds(390, 10, 750, 490);
-        scrollPaneSach.setBounds(1155, 10, 750, 490);
+        scrollPaneDocGia.setBounds(390, 10, 850, 490);
+        scrollPaneSach.setBounds(1255, 10, 650, 490);
         scrollPaneMuonTra.setBounds(390, 515, 1515, 490);
 
         contentPane.add(scrollPaneDocGia);
@@ -599,6 +641,6 @@ public class Graphic {
         });
     }
 
-
-    public static void main(String[] a) {}
+    public static void main(String[] a) {
+    }
 }

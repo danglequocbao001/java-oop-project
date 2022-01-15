@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class BorrowStatus {
     PostgreSql connector;
     public static String GIVE_BACK = "Người Đọc Đã Trả";
-    public static String LOST = "Người Đọc Đã Là Mất";
+    public static String LOST = "Người Đọc Đã Làm Mất";
 
     public BorrowStatus(PostgreSql connector) {
         super();
