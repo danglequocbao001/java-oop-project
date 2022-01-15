@@ -7,17 +7,18 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-// TODO: Add function query these columns
-// SELECT readers.id, readers.first_name, readers.last_name, readers.gender, readers.status, COUNT(borrow_statuses.reader_id) AS borrowed
-// FROM readers
-// LEFT JOIN borrow_statuses 
-// 	ON readers.id = borrow_statuses.reader_id
-// GROUP BY borrow_statuses.reader_id, readers.id
-// ORDER BY readers.id;
-
 public class Reader {
     PostgreSql connector;
-    String GET_ALL = "SELECT * FROM readers ORDER BY id";
+    public static String ACTIVE = "Hoạt động";
+    public static String DEACTIVE = "Khóa";
+
+    String GET_ALL = ( "SELECT readers.id, readers.first_name, readers.last_name, readers.gender, readers.status, COUNT(borrow_statuses.reader_id) AS borrowed " +
+                       "FROM readers " +
+                       "LEFT JOIN borrow_statuses  " +
+                       "	ON readers.id = borrow_statuses.reader_id " +
+                       "WHERE  readers.status != '%s'" +
+                       "GROUP BY borrow_statuses.reader_id, readers.id " +
+                       "ORDER BY readers.id; ");
     String CREATE_ONE = ( "INSERT INTO readers " +
                           "       (first_name, last_name, gender, status, created_at, updated_at) " +
                           "VALUES (?         , ?        , ?     , ?     , NOW()     , NOW())" );
@@ -36,12 +37,12 @@ public class Reader {
         this.connector = connector;
     }
 
-    public Response getAll() {
+    public Response getAll(Boolean onlyAvailable) {
         ArrayList<String[]> records = new ArrayList<String[]>();
 
         try {
             this.connector.statement = this.connector.connection.createStatement();
-            ResultSet rs = this.connector.statement.executeQuery(this.GET_ALL);
+            ResultSet rs = this.connector.statement.executeQuery(String.format(GET_ALL, onlyAvailable? Reader.DEACTIVE : ""));
 
             Integer index = 0;
             while (rs.next()) {
@@ -51,7 +52,7 @@ public class Reader {
                     rs.getString("last_name"),
                     rs.getString("gender"),
                     rs.getString("status"),
-                    "1",
+                    rs.getString("borrowed"),
                 });
                 index += 1;
             }
@@ -133,7 +134,7 @@ public class Reader {
         }
 
         // list all
-        String[][] result = (String[][]) reader.getAll().data;
+        String[][] result = (String[][]) reader.getAll(true).data;
         for (String[] ele: result) {
             System.out.println(String.join("-", ele));
         }
