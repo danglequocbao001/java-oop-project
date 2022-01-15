@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 public class Book {
     PostgreSql connector;
+    public static String LOST = "Đã mất";
+    public static String LOCKED = "Đã khóa";
+    public static String BORROWABLE = "Cho mượn được";
 
     public Book(PostgreSql connector) {
         super();
@@ -15,6 +18,7 @@ public class Book {
     }
 
     String GET_ALL = "SELECT * FROM books ORDER BY id";
+    String GET_ALL_WITH_FILTER = "SELECT * FROM books WHERE status = '%s' ORDER BY id";
     String CREATE_ONE = ( "INSERT INTO books " +
                           "       (name, position, status, created_at, updated_at) " +
                           "VALUES (?   , ?       , ?     , NOW()     , NOW())" );
@@ -25,14 +29,23 @@ public class Book {
                           "    status = ? , " +
                           "    updated_at = NOW() WHERE id = ?" );
 
+    String UPDATE_STATUS = ( "UPDATE books " +
+                          "SET status = ? , " +
+                          "    updated_at = NOW() WHERE id = ?" );
+
     String DELETE_ONE = "DELETE FROM books WHERE id = ?";
 
-    public Response getAll() {
+    public Response getAll(Boolean onlyAvailable) {
         ArrayList<String[]> records = new ArrayList<String[]>();
 
         try {
             this.connector.statement = this.connector.connection.createStatement();
-            ResultSet rs = this.connector.statement.executeQuery("select * from books");
+
+            String query = GET_ALL;
+            if (onlyAvailable) {
+                query = String.format(GET_ALL_WITH_FILTER, Book.BORROWABLE);
+            }
+            ResultSet rs = this.connector.statement.executeQuery(query);
 
             Integer index = 0;
             while (rs.next()) {
@@ -48,7 +61,7 @@ public class Book {
             this.connector.statement.close();
 
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("{Book#getAll}" + e);
         }
 
         String[][] results = new String[records.size()][];
@@ -71,11 +84,11 @@ public class Book {
                 if (generatedKeys.next())
                 id = String.valueOf(generatedKeys.getLong(1));
             } catch (Exception exception1) {
-                System.out.println(exception1);
+                System.out.println("{Book#createOne}" + exception1);
             }
 
         } catch (Exception exception2) {
-        	System.out.println(exception2);
+                System.out.println("{Book#createOne}" + exception2);
         }
         return new Response(id);
     }
@@ -90,7 +103,21 @@ public class Book {
             statement.executeUpdate();
 
         } catch (Exception exception2) {
-        	System.out.println(exception2);
+                System.out.println("{Book#updateOne}" + exception2);
+        }
+
+        return new Response(id);
+    }
+
+    public Response updateStatusBook(String id, String status) {
+        try {
+            PreparedStatement statement = this.connector.connection.prepareStatement(UPDATE_STATUS, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, status);
+            statement.setLong(2, Long.parseLong(id));
+            statement.executeUpdate();
+
+        } catch (Exception exception2) {
+                System.out.println("{Book#lostBook}" + exception2);
         }
 
         return new Response(id);
@@ -103,7 +130,7 @@ public class Book {
             statement.executeUpdate();
 
         } catch (Exception exception2) {
-        	System.out.println(exception2);
+                System.out.println("{Book#deleteOne}" + exception2);
         }
 
         return new Response(id);
@@ -115,13 +142,8 @@ public class Book {
 
         try {
             postgresql.connect();
-        } catch (Exception e) {}
-
-
-        // list all
-        String[][] result = (String[][]) book.getAll().data;
-        for (String[] ele: result) {
-            System.out.println(String.join("-", ele));
+        } catch (Exception e) {
+            System.out.println("{Book#main}" + e);
         }
 
         String id;
@@ -129,9 +151,23 @@ public class Book {
         id = (String) book.createOne("9", "9", "9").data;
         System.out.println(id);
 
+        // list all
+        String[][] result = (String[][]) book.getAll(false).data;
+        for (String[] ele: result) {
+            System.out.println(String.join("-", ele));
+        }
+
         // update one
         id = (String) book.updateOne(id, "9", "9", "9").data;
         System.out.println(id);
+
+        id = (String) book.updateStatusBook(id, Book.LOCKED).data;
+        System.out.println(id);
+
+        result = (String[][]) book.getAll(false).data;
+        for (String[] ele: result) {
+            System.out.println(String.join("-", ele));
+        }
 
         id = (String) book.deleteOne(id).data;
         System.out.println(id);

@@ -4,8 +4,7 @@ import javax.swing.*;
 
 import com.s3rd.java.config.GlobalVariable;
 import com.s3rd.java.database.PostgreSql;
-import com.s3rd.java.models.Book;
-import com.s3rd.java.models.Reader;
+import com.s3rd.java.models.*;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -14,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.time.LocalDateTime;
 
 public class Graphic {
     private JFrame mainFrame;
@@ -205,8 +205,8 @@ public class Graphic {
         GraphicFunctions.setRadioButton(nam, contentPane, "Nam", 460, 350, 170, 30);
         GraphicFunctions.setRadioButton(nu, contentPane, "Nữ", 460, 380, 170, 30);
         GraphicFunctions.setRadioButton(khac, contentPane, "Khác", 460, 410, 170, 30);
-        GraphicFunctions.setRadioButton(hoatDong, contentPane, "Hoạt động", 460, 450, 170, 30);
-        GraphicFunctions.setRadioButton(khoa, contentPane, "Khóa", 460, 480, 170, 30);
+        GraphicFunctions.setRadioButton(hoatDong, contentPane, Reader.ACTIVE, 460, 450, 170, 30);
+        GraphicFunctions.setRadioButton(khoa, contentPane, Reader.DEACTIVE, 460, 480, 170, 30);
         GraphicFunctions.setButton(buttonThemDocGia, contentPane, "THÊM ĐỘC GIẢ", 350, 520, 150, 40);
         GraphicFunctions.setButton(buttonSuaDocGia, contentPane, "SỬA ĐỘC GIẢ", 520, 520, 150, 40);
         buttonThemDocGia.addActionListener(new ActionListener() {
@@ -287,7 +287,7 @@ public class Graphic {
 
         JTable tableDocGia = new JTable();
         String firstRow[] = { "MÃ ĐỘC GIẢ", "HỌ", "TÊN", "GIỚI TÍNH", "TRẠNG THÁI", "SỐ SÁCH ĐANG MƯỢN" };
-        String[][] data = (String[][]) reader.getAll().data;
+        String[][] data = (String[][]) reader.getAll(false).data;
         tableDocGia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int rowDocGia = tableDocGia.rowAtPoint(evt.getPoint());
@@ -367,8 +367,8 @@ public class Graphic {
         GraphicFunctions.setLabel(nhapMaSach, contentPane, "Chọn vào bảng để hiển thị!", 465, 230, 200, 20);
         GraphicFunctions.setTextField(nhapTenSach, contentPane, 465, 270, 150, 20);
         GraphicFunctions.setTextField(nhapViTri, contentPane, 465, 310, 150, 20);
-        GraphicFunctions.setRadioButton(choMuonDuoc, contentPane, "Cho mượn được", 460, 350, 170, 30);
-        GraphicFunctions.setRadioButton(daKhoa, contentPane, "Đã khóa", 460, 380, 170, 30);
+        GraphicFunctions.setRadioButton(choMuonDuoc, contentPane, Book.BORROWABLE, 460, 350, 170, 30);
+        GraphicFunctions.setRadioButton(daKhoa, contentPane, Book.LOCKED, 460, 380, 170, 30);
         GraphicFunctions.setButton(buttonThemSach, contentPane, "THÊM SÁCH", 350, 460, 150, 40);
         GraphicFunctions.setButton(buttonSuaSach, contentPane, "SỬA SÁCH", 520, 460, 150, 40);
 
@@ -388,7 +388,7 @@ public class Graphic {
                         book.createOne(
                                 nhapTenSach.getText(),
                                 nhapViTri.getText(),
-                                "Cho mượn được");
+                                Book.BORROWABLE);
                         danhMucSach();
                     }
                 }
@@ -445,7 +445,7 @@ public class Graphic {
 
         JTable tableDMS = new JTable();
         String firstRow[] = { "MÃ SÁCH", "TÊN SÁCH", "VỊ TRÍ", "TRẠNG THÁI" };
-        String[][] data = (String[][]) book.getAll().data;
+        String[][] data = (String[][]) book.getAll(false).data;
         tableDMS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int rowDMS = tableDMS.rowAtPoint(evt.getPoint());
@@ -453,12 +453,12 @@ public class Graphic {
                 nhapTenSach.setText((String) tableDMS.getModel().getValueAt(rowDMS, 1));
                 nhapViTri.setText((String) tableDMS.getModel().getValueAt(rowDMS, 2));
 
-                if (((String) tableDMS.getModel().getValueAt(rowDMS, 3)).equals("Cho mượn được")) {
+                if (((String) tableDMS.getModel().getValueAt(rowDMS, 3)).equals(Book.BORROWABLE)) {
                     choMuonDuoc.setSelected(true);
                     daKhoa.setSelected(false);
                     daMat.setSelected(false);
 
-                } else if (((String) tableDMS.getModel().getValueAt(rowDMS, 3)).equals("Đã khóa")) {
+                } else if (((String) tableDMS.getModel().getValueAt(rowDMS, 3)).equals(Book.LOCKED)) {
                     choMuonDuoc.setSelected(false);
                     daKhoa.setSelected(true);
                     daMat.setSelected(false);
@@ -500,6 +500,9 @@ public class Graphic {
         JButton buttonMuonSach = new JButton();
         JButton buttonTraSach = new JButton();
         JButton buttonMatSach = new JButton();
+        Book book = new Book(this.connector);
+        Reader reader = new Reader(this.connector);
+        BorrowStatus borrowStatuses = new BorrowStatus(this.connector);
         GraphicFunctions.setLabel(muonSach, contentPane, "MƯỢN SÁCH", 140, 170, 150, 20);
         GraphicFunctions.setLabel(traMatSach, contentPane, "TRẢ/MẤT SÁCH", 130, 450, 150, 20);
         GraphicFunctions.setLabel(maDocGia, contentPane, "Mã độc giả", 70, 240, 120, 20);
@@ -517,22 +520,22 @@ public class Graphic {
                 if (nhapMaDocGia.getText().equals("") || nhapMaSach.getText().equals("")) {
                     JOptionPane.showMessageDialog(buttonMuonSach, GlobalVariable.NOT_BLANK);
                 } else {
-                    System.out.println(nhapMaDocGia.getText() + " " + nhapMaSach.getText());
+                    // System.out.println(nhapMaDocGia.getText() + " " + nhapMaSach.getText());
+                    borrowStatuses.createOne(nhapMaSach.getText(), nhapMaDocGia.getText(), LocalDateTime.now(), null);
                 }
             }
         });
 
         buttonTraSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(nhapMaMuonTra.getText());
-
+                borrowStatuses.updateTimeOne(nhapMaMuonTra.getText());
             }
         });
 
         buttonMatSach.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(nhapMaMuonTra.getText());
-
+                borrowStatuses.lostBook(nhapMaMuonTra.getText());
+                book.updateStatusBook(nhapMaMuonTra.getText(), Book.LOST);
             }
         });
 
@@ -540,22 +543,14 @@ public class Graphic {
         JTable tableSach = new JTable();
         JTable tableMuonTra = new JTable();
 
-        String firstRowDocGia[] = { "MÃ ĐỘC GIẢ", "HỌ", "TÊN", "SỐ SÁCH ĐANG MƯỢN" };
-        String firstRowSach[] = { "MÃ SÁCH", "TÊN SÁCH", "VỊ TRÍ" };
-        String firstRowMuonTra[] = { "MÃ MƯỢN TRẢ", "TÊN SÁCH", "NGƯỜI MƯỢN", "THỜI ĐIỂM MƯỢN", "THỜI ĐIỂM TRẢ" };
+        String firstRowDocGia[] = { "MÃ ĐỘC GIẢ", "HỌ", "TÊN", "GIỚI TÍNH", "TRẠNG THÁI", "SỐ SÁCH ĐANG MƯỢN" };
+        String firstRowSach[] = { "MÃ SÁCH", "TÊN SÁCH", "VỊ TRÍ"};
+        String firstRowMuonTra[] = { "MÃ MƯỢN TRẢ", "TÊN SÁCH", "NGƯỜI MƯỢN", "THỜI ĐIỂM MƯỢN", "THỜI ĐIỂM TRẢ", "GHI CHÚ" };
 
-        String dataDocGia[][] = {
-                { "1", "Dang", "Bao", "2" },
-                { "2", "Dangg", "Bao0", "1" },
-                { "3", "Nguyen", "Danh", "0" },
-                { "4", "Nguyen", "Thi", "0" },
-        };
-        String dataSach[][] = {
-                { "1", "OOP with JAVA", "Kệ 1 ngăn 1" },
-                { "2", "Python program language", "Kệ 1 ngăn 2" } };
-        String dataMuonTra[][] = {
-                { "11", "OOP with JAVA", "Dang Bao", "01/01/22", "05/01/22" },
-                { "12", "Python program language", "Nguyễn Danh", "02/02/22", "" } };
+        String dataDocGia[][] = (String[][]) reader.getAll(true).data;
+        String dataSach[][] = (String[][]) book.getAll(true).data;
+        String dataMuonTra[][] = (String[][]) borrowStatuses.getAll().data;
+
         tableDocGia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int rowDocGia = tableDocGia.rowAtPoint(evt.getPoint());
@@ -603,4 +598,7 @@ public class Graphic {
             }
         });
     }
+
+
+    public static void main(String[] a) {}
 }
