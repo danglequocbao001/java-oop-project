@@ -11,7 +11,7 @@ public class Main {
         try {
             postgresql.connect();
             program.loadModels(postgresql);
-            program.mainMenu();
+            program.run();
         } catch (Exception e) {
             System.out.println("{Main#main}" + e);
         }
