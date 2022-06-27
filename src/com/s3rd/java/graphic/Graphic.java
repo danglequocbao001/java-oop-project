@@ -245,11 +245,6 @@ public class Graphic {
                             "Thông báo", JOptionPane.OK_CANCEL_OPTION,
                             JOptionPane.INFORMATION_MESSAGE, null, null, null);
 
-                    // int inputshowMessageDialog = JOptionPane.showOptionDialog(null,
-                    // "Không thể khóa hoặc xóa độc giả đang mượn sách!",
-                    // "Thông báo", JOptionPane.OK_CANCEL_OPTION,
-                    // JOptionPane.INFORMATION_MESSAGE, null, null, null);
-
                     if (inputshowMessageDialog == JOptionPane.OK_OPTION) {
                         reader.updateOne(
                                 nhapMaThe.getText(),
